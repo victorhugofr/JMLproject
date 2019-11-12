@@ -1,0 +1,298 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui">
+		
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Raleway" />
+	<link rel="stylesheet" 
+		href="https://fonts.googleapis.com/css?family=Nunito"/> 
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed;" rel="stylesheet"/> 
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<style>
+	.dropbtn {
+		background-color: white;
+		color: black;
+		padding: 16px;
+		font-size: 16px;
+		border: none;
+	}
+	
+	.ui-state-highlight {
+		background-image: linear-gradient(to bottom, #363636, #363636)
+			!important;
+	}
+	
+	.consultarLink {
+	font-family: 'Nunito', sans-serif;
+		background-color: white;
+		color: black;
+		padding: 16.15px;
+		font-size: 16px;
+		border: none;
+	}
+	
+	a {
+		text-decoration: none !important;
+	}
+	
+	a.group {
+		text-decoration: none !important;
+		color: whit !important;
+	}
+	
+	.dropdown {
+	font-family: 'Nunito', sans-serif;
+		position: relative;
+		display: inline-block;
+	}
+	
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: white;
+		min-width: 160px;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		z-index: 1;
+	}
+	
+	.dropdown-content a {
+	font-family: 'Nunito', sans-serif;
+		color: black;
+		padding: 15px 16px;
+		text-decoration: none;
+		display: block;
+	}
+	
+	.dropdown-content a:hover {
+		background-color: #ddd;
+	}
+	
+	.dropdown:hover .dropdown-content {
+		display: block;
+	}
+	
+	.dropdown:hover .consultarLink {
+		background-color: gray;
+	}
+	
+	.dropdown:hover .dropbtn {
+		background-color: gray;
+	}
+	body, h1, h2, h3, h4, h5, h6 {
+		font-family: "Raleway", sans-serif
+	}
+	
+	/* Full height image header */
+	.w3-bar .w3-button {
+		padding: 16px;
+	}
+	body.bootstrap {
+		height: 100%;
+		line-height: 1.8;
+			
+	}
+	</style>
+	<h:body>
+		<div class="application"
+			style="background-color: #363636; color: #D3D3D3; padding: 2px 0px 0px 0px;height:130px;">
+			<div style="margin-top:30px;">
+				<h:form style="display:inline; margin-left:90%; clear:none; position:absolute;max-height:5px; max-width:200px; ">
+					<div class="dropdown" style="max-height:15px !important;border-radius: 10px 20px !important;">
+						<button class="dropbtn" style=" background-color:grey;color:#D3D3D3;">
+							<i class="fa fa-user" style="float:left !important;">  
+								<h:outputText value="#{usuarioMBean.usuarioLogado.nome}" style="margin-left:10px; font-family: 'Nunito', sans-serif;" />
+							</i>
+						</button>
+						
+						<div class="dropdown-content" style="border-radius: 1px; background-color:grey;color:white;font-family: 'Nunito', sans-serif;">
+							<a href="/sistemacartorial/pages/usuarios/novo.jsf" style="font-family: 'Nunito', sans-serif;"> Alterar perfil</a>
+							<h:commandLink ajax="false" action="#{usuarioMBean.deslogar}"
+						style="color:#white !important;">
+									<h:outputText value="Sair" style="font-family: 'Nunito', sans-serif;"/>
+							</h:commandLink>
+						</div>
+					</div>
+				</h:form>
+				</div>
+			<div style="margin: 0px 0px 130px 0px ! important;">
+			<span style="margin-left: 20px; font-size: 50px ! important;">SIAC</span> 
+			<br/> 
+			<span style="margin-left: 20px ! important; margin-top:-30px ! important;">Sistema de automação cartorial</span>
+			</div>
+		</div>
+		<p:growl id="growl" showDetail="true" sticky="false" />
+		<div class="w3-white w3-card" id="myNavbar" style="max-height: 60px;">
+			<!-- 				<a href="#home" class="w3-bar-item w3-button w3-wide"><span -->
+			<!-- 					style="font-size: 22px;">SIGCAR</span></a> -->
+			<!-- Right-sided navbar links -->
+			<h:form>
+				<div class="dropdown">
+					<a style="color: black" href="../index.jsf?faces-redirect=true" class="consultarLink">Início
+					</a>
+				</div>
+				<div class="dropdown">
+					<button class="dropbtn">Usuário</button>
+					<div class="dropdown-content">
+						<a href="/sistemacartorial/pages/usuarios/novo.jsf"> Novo</a>
+						<h:commandLink ajax="false" action="#{usuarioMBean.listarUsuarios}">
+							<h:outputText value="Listar" />
+						</h:commandLink>
+					</div>
+				</div>
+				<div class="dropdown">
+					<button class="dropbtn">Funcionário</button>
+					<div class="dropdown-content">
+						<a href="/sistemacartorial/pages/funcionarios/novo.jsf"> Novo</a>
+						<h:commandLink ajax="false"
+							action="#{funcionarioMBean.listarFuncionarios}">
+							<h:outputText value="Listar" />
+						</h:commandLink>
+					</div>
+				</div>
+				<div class="dropdown">
+					<a style="color: black" href="/sistemacartorial/pages/zona/zona.jsf"
+						class="consultarLink">Consultar Zona Imovel </a>
+				</div>
+	
+				<div class="dropdown">
+					<button class="dropbtn">Serviço</button>
+					<div class="dropdown-content">
+						<a href="/sistemacartorial/pages/servicos/novo.jsf"> Novo</a>
+						<h:commandLink ajax="false" action="#{servicoMBean.listarServicosUsuario}">
+							<h:outputText value="Serviços abertos" />
+						</h:commandLink>
+					</div>
+				</div>
+				<div class="dropdown">
+					<a style="color: black" href="/sistemacartorial/pages/documentos/documentacao.jsf"
+						class="consultarLink">Documentos</a>
+				</div>
+			</h:form>
+		</div>
+	</h:body>
+	<body>	
+    	<div class="w3-row-padding">
+	        <div id="loader" class="load-bar" style="display: none">
+	            <div class="bar"></div>
+	            <div class="bar"></div>
+	            <div class="bar"></div>
+	        </div>
+	        
+	        <p:dialog id="adminStatusDialog" modal="true" widgetVar="statusDialog" draggable="false" closable="false"
+	                  resizable="false" responsive="true" showHeader="false" appendTo="@(body)">
+	        </p:dialog>
+	
+			<h6 style="margin: 20px 0px 0px 10px">
+				<a href="../index.jsf?faces-redirect=true"
+					style="color: blue !important">Inicio</a> / Consultar Zona
+			</h6>
+		</div>
+		<div class="w3-container" style="padding: 20px!important; padding-bottom: 20px;">
+		<h5>Lista de Documentos por Natureza</h5>
+		<div class="row" style="border-style:ridge; border-width:2px; width: 80%; margin-left: 0px;">
+			<div class="col-4" style="padding-left: 0px;">
+				<div class="list-group" id="list-tab" role="tablist" >
+					<a class=" group list-group-item list-group-item-action active" id="list-imoveis-list" 
+						data-toggle="list" href="#list-imoveis" role="tab" aria-controls="imoveis">Registro de Imóveis</a>
+					<a class="list-group-item list-group-item-action" id="list-notas-list" 
+						data-toggle="list" href="#list-notas" role="tab" aria-controls="notas">Tabelionato de Notas</a>
+					<a class="list-group-item list-group-item-action" id="list-protesto-list" 
+						data-toggle="list" href="#list-protesto" role="tab" aria-controls="Protesto">Tabelionato de Protesto</a>
+					<a class="list-group-item list-group-item-action" id="list-titulos-list" 
+						data-toggle="list" href="#list-titulos" role="tab" aria-controls="titulos">Registro de Títulos e Documentos</a>
+					<a class="list-group-item list-group-item-action" id="list-pessoajuridica-list" 
+						data-toggle="list" href="#list-pessoajuridica" role="tab" aria-controls="juridica">Registro Civil de Pessoas Jurídicas</a>
+						
+				</div>
+			</div>
+			<div class="col-8">
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="list-imoveis" role="tabpanel" 
+						aria-labelledby="list-imoveis-list" style="padding-top: 20px;">
+						<p> <a href="/sistemacartorial/resources/documentos/imoveis/doc_convencao_condominio.pdf" 
+						target="_blank">
+							<strong>Documentação para Convenção de Condomínio </strong></a>
+						</p>
+						<p> <a href="/sistemacartorial/resources/documentos/imoveis/doc_registro_incorporacao.pdf" 
+						target="_blank">
+							<strong>Documentação para Registro de Incorporação </strong></a>
+						</p>
+						<p> <a href="/sistemacartorial/resources/documentos/imoveis/doc_averbacao.pdf"
+						target="_blank">
+							<strong>Documentação para Averbação </strong></a>
+						</p>
+						<p> <a href="/sistemacartorial/resources/documentos/imoveis/doc_estado_civil.pdf" 
+						target="_blank">
+							<strong>Documentação para Alteração de Estado Civil </strong></a>
+						</p>
+						<p> <a href="/sistemacartorial/resources/documentos/imoveis/doc_pacto_antenupcial.pdf" 
+						target="_blank">
+							<strong>Documentação para Pacto Antenupcial</strong></a>
+						</p>
+					</div>
+					<div class="tab-pane fade" id="list-notas" role="tabpanel" 
+						aria-labelledby="list-notas-list" style="padding-top: 20px;">
+						<p> <a href="/sistemacartorial/resources/documentos/notas/doc_divorcio.pdf"
+						target="_blank">
+							<strong>Documentação para Divórcio</strong></a>
+						</p>
+						<p> <a href="/sistemacartorial/resources/documentos/notas/doc_inventario.pdf" 
+						target="_blank">
+							<strong>Documentação para Inventario</strong></a>
+						</p>
+						<p> <a href="/sistemacartorial/resources/documentos/notas/doc_escrituras.pdf"
+						target="_blank">
+							<strong>Documentação para Escrituras</strong></a>
+						</p>
+					</div>
+					<div class="tab-pane fade" id="list-protesto" role="tabpanel" 
+						aria-labelledby="list-protesto-list" style="padding-top: 20px;">
+						<p> <a href="/sistemacartorial/resources/documentos/protesto/cheque ao portador.JPG" 
+						target="_blank">
+							<strong>Protesto de Cheque ao Portador </strong></a>
+						</p>
+						<p> <a href="/sistemacartorial/resources/documentos/protesto/cheque nominal.JPG" 
+						target="_blank">
+							<strong>Protesto de Cheque Nominal </strong></a>
+						</p>
+						<p> <a href="/sistemacartorial/resources/documentos/protesto/duplicata.JPG" 
+						target="_blank">
+							<strong>Duplicata com Endosso Mandato </strong></a>
+						</p>
+						<p> <a href="/sistemacartorial/resources/documentos/protesto/Nota_Promissoria.jpg" 
+						target="_blank">
+							<strong>Nota Promissória</strong></a>
+						</p>
+						<p> <a href="/sistemacartorial/resources/documentos/protesto/CancelamentodeProtesto.pdf" 
+						target="_blank">
+							<strong>Cancelamento de Protesto</strong></a>
+						</p>
+					</div>
+					<div class="tab-pane fade" id="list-titulos" role="tabpanel" 
+						aria-labelledby="list-titulos-list" style="padding-top: 20px;">
+						dddd
+					</div>
+					<div class="tab-pane fade" id="list-pessoajuridica" role="tabpanel" 
+						aria-labelledby="list-pessoajuridica-list-list" style="padding-top: 20px;">
+						eee
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	template="/include/template.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:messages />
+		<h6 style="margin: 20px 0px 15px 10px">
+			<a href="../index.jsf?faces-redirect=true"
+				style="color: blue !important">Inicio</a> / Acompanhar servicos
+			existentes
+		</h6>
+		
+		<b:form horizontal = "true">
+		<h4>Entidade:</h4>
+		<h:outputText value="#{servicoMBean.servicoAcompanhar.nomeEntidade}"/>
+		<h4>Documentos:</h4>
+		<b:dataTable value="#{servicoMBean.servicoAcompanhar.documentos}" var="documento">
+				<b:dataTableColumn value="#{documento.nome}" label="Nome do arquivo" />
+				<b:dataTableColumn value="#{documento.status}" label="Status" />
+				<b:dataTableColumn label="">
+					<b:button look="primary" onclick="$('.modalPseudoClass2').modal()" value="Ver comentarios"/>
+					
+					<b:modal id="amodal2" title="Comentarios" styleClass="modalPseudoClass2"
+					           closable="true"  close-on-escape="false" backdrop="false">
+					    <p>Comentário:
+					    </p>
+					    <h:outputText value="#{documento.observacao}"></h:outputText>
+					    <f:facet name="footer"> 
+					      <b:commandButton value="Fechar" dismiss="modal" />
+					
+					      <b:button value="Contestar" look="danger" onclick="$('.modalPseudoClass3').modal()" /> 
+					      
+					    
+					    </f:facet>
+  					</b:modal>
+  					
+  					<b:modal id="amodal3" title="Contestar" styleClass="modalPseudoClass3"
+					           closable="true"  close-on-escape="true" backdrop="false">
+					    <h3>Contestacao:
+					    </h3>
+					    <b:inputTextarea value="#{documentoMBean.contestacao}" rows="6" span="12" style="width:200px !important;" >
+					    </b:inputTextarea>
+					     <p style="font-size:10px;">*Atenção! Só é possível contestar 3 vezes, após isso, apenas em cartório.</p>
+					    <f:facet name="footer"> 
+					      <b:commandButton value="Fechar" dismiss="modal" />
+					
+					      <b:commandButton value="Contestar" look="danger" dismiss="modal" action="#{documentoMBean.contestar(documento)}" onclick="$('.modalPseudoClass3').modal()" /> 
+					      
+					    
+					    </f:facet>
+  					</b:modal>
+				</b:dataTableColumn>
+		</b:dataTable>
+			<!-- 			<b:commandButton action="#{materialMBean.novoMaterial}" -->
+			<!-- 						value="Novo Cadastro" look="primary" /> -->
+			<!-- 			<b:commandButton action="/pages/index.jsf" -->
+			<!-- 						value="Voltar" look="primary" /> -->
+		</b:form>
+	</ui:define>
+</ui:composition>
