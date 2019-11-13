@@ -7,9 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
+
 import br.com.sigcar.dominio.Contestacao;
 import br.com.sigcar.util.HibernateUtil;
-
 @Stateless
 public class ContestacaoRepositorio {
 
