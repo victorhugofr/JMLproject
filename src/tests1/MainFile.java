@@ -1,4 +1,4 @@
-package tests;
+package tests1;
 
 public class MainFile {
 
