@@ -1,5 +1,7 @@
 package tests1;
 
+import br.com.sigcar.services.ZonaService;
+
 public class MainFile {
 
 	private /*@ spec_public @*/ int age;
@@ -39,7 +41,10 @@ public class MainFile {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MainFile a = new MainFile(-1, 2);
+		MainFile a = new MainFile(1, 2);
+		
+		ZonaService zona = new ZonaService();
+		zona.buscarCep(null);
 		System.out.println("A");
 		a.older();
 		System.out.println("B");

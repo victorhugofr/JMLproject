@@ -1,6 +1,6 @@
 package br.com.sigcar.execucao;
 
-import br.com.sigcar.exceptions.DeathException;
+import br.com.sigcar.services.ZonaService;
 
 public class MainFile {
 
@@ -44,7 +44,10 @@ public class MainFile {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MainFile a = new MainFile(-1, 2);
+		
+		ZonaService zona = new ZonaService();
+		zona.buscarCep(null);
+		MainFile a = new MainFile(1, 2);
 		System.out.println("A");
 		try {
 			a.older();

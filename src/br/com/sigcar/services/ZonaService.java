@@ -16,6 +16,8 @@ import com.google.gson.Gson;
 
 import br.com.sigcar.dominio.Endereco;
 
+//import br.com.sigcar.dominio.Endereco;
+
 @Named("zonaService")
 @SessionScoped
 public class ZonaService implements Serializable{
@@ -23,17 +25,21 @@ public class ZonaService implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String cep;
+	private /*@ spec_public @*/ String cep;  //@in cepC;
 	private String cartorio = "";
 	
 	public ZonaService(){
 		
 	}
-	public static String buscarCep(String cep) {
+	
+	/*@ public normal_behavior
+	@ 	requires cep2 != null;
+	@*/
+	public String buscarCep(String cep2) throws RuntimeException {
         String json;
 
         try {
-            URL url = new URL("http://viacep.com.br/ws/"+ cep +"/json");
+            URL url = new URL("http://viacep.com.br/ws/"+ cep2 +"/json");
             URLConnection urlConnection = url.openConnection();
             InputStream is = urlConnection.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -50,7 +56,14 @@ public class ZonaService implements Serializable{
         return json;
     }
 	
-	public static String getZona(String cep) {
+	/*@ public normal_behavior
+	@ 	requires cep != null;
+	@ also
+	@	public exceptional_behavior
+	@ 	requires cep == null;
+	@ 	signals_only RuntimeException;
+	@*/
+	public /*@ pure @*/ String getZona(String cep) {
 		String json = buscarCep(cep);
 		if(json==null) {
 			return null;
@@ -61,13 +74,13 @@ public class ZonaService implements Serializable{
 			return null;
 		}
 		if(endereco.getBairro().equals("Alecrim")  || endereco.getBairro().equals("Areia Preta")  || endereco.getBairro().equals("Barro Vermelho")  || endereco.getBairro().equals("Bom Pastor")
-				||endereco.getBairro().equals("Cidade Alta")  || endereco.getBairro().equals("Candelária")  || endereco.getBairro().equals("Capim Macio")
-				|| endereco.getBairro().equals("Cidade da Esperança")  || endereco.getBairro().equals("Cidade Nova")  || endereco.getBairro().equals("Dix-Sept Rosado")
-				||endereco.getBairro().equals("Felipe Camarão")  || endereco.getBairro().equals("Guarapes")  || endereco.getBairro().equals("Lagoa Seca")  ||
-				endereco.getBairro().equals("Mãe Luíza")  || endereco.getBairro().equals("Lagoa Nova") || endereco.getBairro().equals("Petrópolis")) {
+				||endereco.getBairro().equals("Cidade Alta")  || endereco.getBairro().equals("Candelï¿½ria")  || endereco.getBairro().equals("Capim Macio")
+				|| endereco.getBairro().equals("Cidade da Esperanï¿½a")  || endereco.getBairro().equals("Cidade Nova")  || endereco.getBairro().equals("Dix-Sept Rosado")
+				||endereco.getBairro().equals("Felipe Camarï¿½o")  || endereco.getBairro().equals("Guarapes")  || endereco.getBairro().equals("Lagoa Seca")  ||
+				endereco.getBairro().equals("Mï¿½e Luï¿½za")  || endereco.getBairro().equals("Lagoa Nova") || endereco.getBairro().equals("Petrï¿½polis")) {
 			return "Zona 1";
-		}else if(endereco.getBairro().equals("Igapó")||endereco.getBairro().equals("Nossa Senhora da Apresentação 	")|| endereco.getBairro().equals("Lagoa Azul")
-				||endereco.getBairro().equals("Nossa Senhora de Nazaré")|| endereco.getBairro().equals("Pajuçara")|| endereco.getBairro().equals("Potengi")
+		}else if(endereco.getBairro().equals("Igapï¿½")||endereco.getBairro().equals("Nossa Senhora da Apresentaï¿½ï¿½o 	")|| endereco.getBairro().equals("Lagoa Azul")
+				||endereco.getBairro().equals("Nossa Senhora de Nazarï¿½")|| endereco.getBairro().equals("Pajuï¿½ara")|| endereco.getBairro().equals("Potengi")
 				||endereco.getBairro().equals("Quintas")|| endereco.getBairro().equals("Redinha")||endereco.getBairro().equals("Ribeira")||
 				endereco.getBairro().equals("Rocas")) {
 			return "Zona 2";
@@ -76,7 +89,7 @@ public class ZonaService implements Serializable{
 		}
 	}
 
-	public static String getBairro(String cep) {
+	public String getBairro(String cep) {
 		String json = buscarCep(cep);
 		Gson gson = new Gson();
 		Endereco endereco = gson.fromJson(json, Endereco.class);
@@ -84,7 +97,7 @@ public class ZonaService implements Serializable{
 		return endereco.getBairro();
 	}
 	
-	public static String getLogradouro(String cep) {
+	public String getLogradouro(String cep) {
 		String json = buscarCep(cep);
 		Gson gson = new Gson();
 		Endereco endereco = gson.fromJson(json, Endereco.class);
@@ -92,7 +105,7 @@ public class ZonaService implements Serializable{
 		return endereco.getLogradouro();
 	}
 	
-	public static String getUf(String cep) {
+	public String getUf(String cep) {
 		String json = buscarCep(cep);
 		Gson gson = new Gson();
 		Endereco endereco = gson.fromJson(json, Endereco.class);
@@ -104,10 +117,17 @@ public class ZonaService implements Serializable{
 		return cartorio;
 	}
 	
-	public String cartorioZona() {
+	/*@ public normal_behavior
+	@ 	requires this.cep != null;
+	@ also
+	@	public exceptional_behavior
+	@ 	requires this.cep == null;
+	@ 	signals_only RuntimeException;
+	@*/
+	public /*@ pure @*/ String cartorioZona() {
 		String zona = getZona(cep);
 		if(zona==null) {
-			FacesMessage msg = new FacesMessage("CEP Inválido","");
+			FacesMessage msg = new FacesMessage("CEP Invï¿½lido","");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return null;
@@ -122,6 +142,9 @@ public class ZonaService implements Serializable{
 		return cartorio;
 	}
 	
+	/*@ 
+	  @ requires cep!=null;
+	  @*/
 	public void setCep(String cep) {
 		this.cep=cep;
 	}
