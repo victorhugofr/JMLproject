@@ -1,6 +1,7 @@
 package br.com.sigcar.execucao;
 
 import br.com.sigcar.services.ZonaService;
+import br.com.sigcar.util.HibernateUtil;
 
 public class MainFile {
 
@@ -46,17 +47,18 @@ public class MainFile {
 	public static void main(String[] args) {
 		
 		ZonaService zona = new ZonaService();
-		zona.buscarCep(null);
-		MainFile a = new MainFile(1, 2);
-		System.out.println("A");
-		try {
-			a.older();
-			System.out.println("B");
-			a.older();
-			System.out.println("C");
-		} catch (DeathException d) {
-			d.printStackTrace();
-		}
+//		zona.buscarCep(null);
+		HibernateUtil hibernate = new HibernateUtil();
+//		MainFile a = new MainFile(1, 2);
+//		System.out.println("A");
+//		try {
+//			a.older();
+//			System.out.println("B");
+//			a.older();
+//			System.out.println("C");
+//		} catch (DeathException d) {
+//			d.printStackTrace();
+//		}
 	}
 
 }

@@ -15,8 +15,28 @@ public class ContestacaoRepositorio {
 
 	@PersistenceContext
 	private static EntityManager entityManager = HibernateUtil.getEntityManager();
-	public static List<Contestacao> contestacoes;
+	private static /*@ spec_public @*/ List<Contestacao> contestacoes;
 	
+	
+	/*@ public normal_behavior
+	  @ requires contestacao!=null;
+	  @ ensures \result == (\exists int i; i<=0 && i<contestacoes.size();contestacoes[i].equals(contestacao)); 
+	 */
+	public /*@ pure @*/ boolean contains(Contestacao contestacao) {
+		EntityTransaction transaction = entityManager.getTransaction();
+		if(!transaction.isActive())
+			transaction.begin();
+		List<Contestacao> retorno = entityManager.createQuery("from Contestacao u where u.id='" + contestacao.getId() + "'")
+				.getResultList();
+		contestacoes=retorno;
+		for (Contestacao u : retorno) {
+			if (u.getId()==contestacao.getId()) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
 	@SuppressWarnings("unchecked")
 	public  Contestacao getContestacao(int id) {
 		EntityTransaction transaction = entityManager.getTransaction();
