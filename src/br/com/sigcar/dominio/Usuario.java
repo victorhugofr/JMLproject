@@ -156,7 +156,7 @@ public class Usuario {
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
 	}
-
+	/**/
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
