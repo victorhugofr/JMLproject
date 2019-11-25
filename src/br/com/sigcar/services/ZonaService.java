@@ -25,14 +25,14 @@ public class ZonaService implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private /*@ spec_public @*/ String cep;  //@in cepC;
+	private /*@ spec_public @*/ String cep;
 	private String cartorio = "";
 	
 	public ZonaService(){
 		
 	}
 	
-	/*@ public normal_behavior
+	/*@ 
 	@ 	requires cep2 != null;
 	@*/
 	public String buscarCep(String cep2) throws RuntimeException {
@@ -56,15 +56,11 @@ public class ZonaService implements Serializable{
         return json;
     }
 	
-	/*@ public normal_behavior
-	@ 	requires cep != null;
-	@ also
-	@	public exceptional_behavior
-	@ 	requires cep == null;
-	@ 	signals_only RuntimeException;
+	/*@ 
+	@ 	requires cep2 != null;
 	@*/
-	public /*@ pure @*/ String getZona(String cep) {
-		String json = buscarCep(cep);
+	public /*@ pure @*/ String getZona(String cep2) {
+		String json = buscarCep(cep2);
 		if(json==null) {
 			return null;
 		}
@@ -117,12 +113,8 @@ public class ZonaService implements Serializable{
 		return cartorio;
 	}
 	
-	/*@ public normal_behavior
+	/*@ 
 	@ 	requires this.cep != null;
-	@ also
-	@	public exceptional_behavior
-	@ 	requires this.cep == null;
-	@ 	signals_only RuntimeException;
 	@*/
 	public /*@ pure @*/ String cartorioZona() {
 		String zona = getZona(cep);
@@ -143,10 +135,10 @@ public class ZonaService implements Serializable{
 	}
 	
 	/*@ 
-	  @ requires cep!=null;
+	  @ requires cep2!=null;
 	  @*/
-	public void setCep(String cep) {
-		this.cep=cep;
+	public void setCep(String cep2) {
+		this.cep=cep2;
 	}
 	
 	public String getCep() {

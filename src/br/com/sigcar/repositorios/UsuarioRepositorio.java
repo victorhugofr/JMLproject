@@ -1,79 +1,65 @@
 package br.com.sigcar.repositorios;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceContext;
-
 import br.com.sigcar.dominio.Usuario;
-import br.com.sigcar.util.HibernateUtil;
-@Stateless
+
 public class UsuarioRepositorio {
-	@PersistenceContext
-	private static EntityManager entityManager = HibernateUtil.getEntityManager();
-	public static List<Usuario> usuarios;
+	public /*@ spec_public @*/  List<Usuario> usuarios;
 
 	
-	@SuppressWarnings("unchecked")
+	public UsuarioRepositorio() {
+		usuarios = new ArrayList<Usuario>();
+	}
+	
+	/*@ public normal_behavior
+	  @ requires usuario!=null;
+	  @ ensures \result == (\exists int i; i<=0 && i<usuarios.size();usuarios[i].equals(usuario)); 
+	 */
+	public /*@ pure @*/ boolean contains(Usuario usuario) {
+		for (Usuario u : usuarios) {
+			if (u.equals(usuario)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public  Usuario getUsuario(String login) {
-		EntityTransaction transaction = entityManager.getTransaction();
-		if(!transaction.isActive())
-			transaction.begin();
-		List<Usuario> retorno = entityManager.createQuery("from Usuario u where u.login='" + login + "'")
-				.getResultList();
-
-		for (Usuario u : retorno) {
+		for (Usuario u : usuarios) {
 			if (u.getLogin().equals(login)) {
 				return u;
 			}
 		}
 		return null;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public Usuario getUsuario(Integer id) {
-		EntityTransaction transaction = entityManager.getTransaction();
-		if(!transaction.isActive())
-			transaction.begin();
-		List<Usuario> retorno = entityManager.createQuery("from Usuario u where u.id='" + id + "'")
-				.getResultList();
 
-		for (Usuario u : retorno) {
-			if (u.getId()==id.intValue()) {
-				return u;
-			}
-		}
-		return null;
-	}
-
-	public void salvar(Usuario entidade) {
-		EntityTransaction transaction = entityManager.getTransaction();
-		if (!transaction.isActive())
-			transaction.begin();
-		if(entidade.getId()==0)
-			entityManager.persist(entidade);
-		else 
-			entityManager.merge(entidade);
-		transaction.commit();
+	/*@ public normal_behavior
+	  @ requires  entidade!=null && !this.contains(entidade);
+	  @ ensures \result ==true;
+	  @ ensures contains(entidade);
+	  @ ensures (\forall Usuario i; i!=entidade ;contains(i)<==>\old(contains(i)));
+	  @ ensures usuarios.size() == \old(usuarios.size())+1;
+	  */
+	public boolean salvar(Usuario entidade) {
+		usuarios.add(entidade);
+		return true;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Usuario> listarUsuarios(){
-		List<Usuario> retorno = entityManager.createQuery("from Usuario").getResultList();
-		usuarios=retorno;
 		return usuarios;
 	}
 
-	public void remover(Usuario usuarioRemovido) {
-		Object id = HibernateUtil.getPrimaryKey(usuarioRemovido);
-		
-		EntityTransaction transaction = entityManager.getTransaction();
-		if (!transaction.isActive())
-			transaction.begin();
-		
-		entityManager.createNativeQuery("delete from usuario where id ="+id).executeUpdate();
-		transaction.commit();
+	/*@ public normal_behavior
+	  @ requires entidade!=null && this.contains(entidade);
+	  @ ensures \result ==true;
+	  @ ensures !contains(entidade);
+	  @ ensures (\forall Usuario i; i!=entidade ;contains(i)<==>\old(contains(i)));
+	  @ ensures usuarios.size() == \old(usuarios.size())-1;
+	  */
+	public boolean remover(Usuario entidade) {
+		usuarios.remove(entidade);
+		return true;
 	}
 }

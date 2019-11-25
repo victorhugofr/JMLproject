@@ -76,12 +76,6 @@ public class ServicoMBean implements Serializable {
 		return "/pages/servicos/list.jsf?faces-redirect=true";
 	}
 	
-	public String listarServicosUsuario() {
-		servicosModel = new ListDataModel<Servico>(servicoRepositorio.listarServicosUsuario());
-
-		return "/pages/servicos/list.jsf?faces-redirect=true";
-	}
-	
 	public String abrirServico(){
 		Servico servicoBd = servicoRepositorio.getServico(servico.getNomeEntidade());
 		
@@ -106,7 +100,7 @@ public class ServicoMBean implements Serializable {
 			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 			return "/pages/index.jsf?faces-redirect=true";
 		}else {
-			FacesMessage msg = new FacesMessage("Servico ja está aberto","");
+			FacesMessage msg = new FacesMessage("Servico ja estï¿½ aberto","");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return null;

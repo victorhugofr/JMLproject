@@ -1,5 +1,7 @@
 package tests1;
 
+import br.com.sigcar.dominio.Contestacao;
+import br.com.sigcar.repositorios.ContestacaoRepositorio;
 import br.com.sigcar.services.ZonaService;
 
 public class MainFile {
@@ -41,15 +43,15 @@ public class MainFile {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MainFile a = new MainFile(1, 2);
-		
 		ZonaService zona = new ZonaService();
-		zona.buscarCep(null);
-		System.out.println("A");
-		a.older();
-		System.out.println("B");
-		a.older();
-		System.out.println("C");
+		zona.buscarCep("59014560");
+		ContestacaoRepositorio contestacaoRep = new ContestacaoRepositorio();
+		Contestacao contestacao = new Contestacao();
+		contestacao.setTexto("oi");
+		Contestacao contestacao2 = new Contestacao();
+		contestacaoRep.salvar(contestacao);
+		contestacaoRep.salvar(contestacao);
+		contestacaoRep.remover(contestacao2);
 	}
 
 }

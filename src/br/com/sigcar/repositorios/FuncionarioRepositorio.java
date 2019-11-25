@@ -1,31 +1,33 @@
 package br.com.sigcar.repositorios;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceContext;
-
 import br.com.sigcar.dominio.Funcionario;
-import br.com.sigcar.util.HibernateUtil;
 
-@Stateless
 public class FuncionarioRepositorio {
-	@PersistenceContext
-	private static EntityManager entityManager = HibernateUtil.getEntityManager();
-	public static List<Funcionario> funcionarios;
+	public /*@ spec_public @*/  List<Funcionario> funcionarios;
 
 	
-	@SuppressWarnings("unchecked")
+	public FuncionarioRepositorio() {
+		funcionarios = new ArrayList<Funcionario>();
+	}
+	
+	/*@ public normal_behavior
+	  @ requires funcionario!=null;
+	  @ ensures \result == (\exists int i; i<=0 && i<funcionarios.size();funcionarios[i].equals(funcionario)); 
+	 */
+	public /*@ pure @*/ boolean contains(Funcionario funcionario) {
+		for (Funcionario u : funcionarios) {
+			if (u.equals(funcionario)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public  Funcionario getFuncionario(String login) {
-		EntityTransaction transaction = entityManager.getTransaction();
-		if(!transaction.isActive())
-			transaction.begin();
-		List<Funcionario> retorno = entityManager.createQuery("from Funcionario u where u.login='" + login + "'")
-				.getResultList();
-
-		for (Funcionario u : retorno) {
+		for (Funcionario u : funcionarios) {
 			if (u.getLogin().equals(login)) {
 				return u;
 			}
@@ -33,32 +35,31 @@ public class FuncionarioRepositorio {
 		return null;
 	}
 
-	public void salvar(Funcionario entidade) {
-		EntityTransaction transaction = entityManager.getTransaction();
-		if (!transaction.isActive())
-			transaction.begin();
-		if(entidade.getId()==0)
-			entityManager.persist(entidade);
-		else 
-			entityManager.merge(entidade);
-		transaction.commit();
+	/*@ public normal_behavior
+	  @ requires  entidade!=null && !this.contains(entidade);
+	  @ ensures \result ==true;
+	  @ ensures contains(entidade);
+	  @ ensures (\forall Funcionario i; i!=entidade ;contains(i)<==>\old(contains(i)));
+	  @ ensures funcionarios.size() == \old(funcionarios.size())+1;
+	  */
+	public boolean salvar(Funcionario entidade) {
+		funcionarios.add(entidade);
+		return true;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Funcionario> listarUsuarios(){
-		List<Funcionario> retorno = entityManager.createQuery("from Funcionario").getResultList();
-		funcionarios=retorno;
+	public List<Funcionario> listarFuncionarios(){
 		return funcionarios;
 	}
 
-	public void remover(Funcionario usuarioRemovido) {
-		Object id = HibernateUtil.getPrimaryKey(usuarioRemovido);
-		
-		EntityTransaction transaction = entityManager.getTransaction();
-		if (!transaction.isActive())
-			transaction.begin();
-		
-		entityManager.createNativeQuery("delete from funcionario where id ="+id).executeUpdate();
-		transaction.commit();
+	/*@ public normal_behavior
+	  @ requires entidade!=null && this.contains(entidade);
+	  @ ensures \result ==true;
+	  @ ensures !contains(entidade);
+	  @ ensures (\forall Funcionario i; i!=entidade ;contains(i)<==>\old(contains(i)));
+	  @ ensures funcionarios.size() == \old(funcionarios.size())-1;
+	  */
+	public boolean remover(Funcionario entidade) {
+		funcionarios.remove(entidade);
+		return true;
 	}
 }
