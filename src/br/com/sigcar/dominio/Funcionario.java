@@ -12,8 +12,8 @@ public class Funcionario extends Usuario{
 
 	
 	@Temporal(TemporalType.DATE)
-	private Date dataAdmissao;
-	private String funcao;
+	private /*@ spec public @*/ Date dataAdmissao;
+	private /*@ spec public @*/ String funcao;
 	
 	public Funcionario() {
 	}
@@ -25,7 +25,11 @@ public class Funcionario extends Usuario{
 	public Date getDataAdmissao() {
 		return dataAdmissao;
 	}
-
+	
+	/*@ requires dataAdmissao != null
+	 *@ assignable this.dataAdmissao
+	 *@ ensures this.dataAdmissao == dataAdmissao 
+	 */
 	public void setDataAdmissao(Date dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
