@@ -1,5 +1,7 @@
 package br.com.sigcar.execucao;
 
+import br.com.sigcar.dominio.Contestacao;
+import br.com.sigcar.repositorios.ContestacaoRepositorio;
 import br.com.sigcar.services.ZonaService;
 import br.com.sigcar.util.HibernateUtil;
 
@@ -45,10 +47,13 @@ public class MainFile {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
 		ZonaService zona = new ZonaService();
-//		zona.buscarCep(null);
-		HibernateUtil hibernate = new HibernateUtil();
+		zona.buscarCep("59014560");
+		ContestacaoRepositorio contestacaoRep = new ContestacaoRepositorio();
+		Contestacao contestacao = new Contestacao();
+		contestacao.setTexto("oi");
+		contestacaoRep.salvar(contestacao);
+		
 //		MainFile a = new MainFile(1, 2);
 //		System.out.println("A");
 //		try {

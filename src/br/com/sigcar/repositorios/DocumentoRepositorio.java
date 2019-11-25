@@ -1,31 +1,34 @@
 package br.com.sigcar.repositorios;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceContext;
-
 import br.com.sigcar.dominio.Documento;
-import br.com.sigcar.util.HibernateUtil;
 
-@Stateless
 public class DocumentoRepositorio {
 
-	@PersistenceContext
-	private static EntityManager entityManager = HibernateUtil.getEntityManager();
-	public static List<Documento> documentos;
+	private /*@ spec_public @*/  List<Documento> documentos;
 	
-	@SuppressWarnings("unchecked")
+	
+	public DocumentoRepositorio() {
+		documentos = new ArrayList<Documento>();
+	}
+	
+	/*@ public normal_behavior
+	  @ requires documento!=null;
+	  @ ensures \result == (\exists int i; i<=0 && i<documentos.size();documentos[i].equals(documento)); 
+	 */
+	public /*@ pure @*/ boolean contains(Documento documento) {
+		for (Documento u : documentos) {
+			if (u.equals(documento)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public  Documento getDocumento(String nome) {
-		EntityTransaction transaction = entityManager.getTransaction();
-		if(!transaction.isActive())
-			transaction.begin();
-		List<Documento> retorno = entityManager.createQuery("from Documento u where u.nome='" + nome + "'")
-				.getResultList();
-
-		for (Documento u : retorno) {
+		for (Documento u : documentos) {
 			if (u.getNome().equals(nome)) {
 				return u;
 			}
@@ -33,32 +36,32 @@ public class DocumentoRepositorio {
 		return null;
 	}
 	
-	public void salvar(Documento entidade) {
-		EntityTransaction transaction = entityManager.getTransaction();
-		if (!transaction.isActive())
-			transaction.begin();
-		if(entidade.getId()==0)
-			entityManager.persist(entidade);
-		else 
-			entityManager.merge(entidade);
-		transaction.commit();
+	/*@ public normal_behavior
+	  @ requires  entidade!=null && !this.contains(entidade);
+	  @ ensures \result ==true;
+	  @ ensures contains(entidade);
+	  @ ensures (\forall Documento i; i!=entidade ;contains(i)<==>\old(contains(i)));
+	  @ ensures documentos.size() == \old(documentos.size())+1;
+	  */
+	public boolean salvar(Documento entidade) {
+		documentos.add(entidade);
+		return true;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Documento> listarDocumentos(){
-		List<Documento> retorno = entityManager.createQuery("from Documento").getResultList();
-		documentos=retorno;
 		return documentos;
 	}
 	
-	public void remover(Documento servicoRemovido) {
-		Object id = HibernateUtil.getPrimaryKey(servicoRemovido);
-		
-		EntityTransaction transaction = entityManager.getTransaction();
-		if (!transaction.isActive())
-			transaction.begin();
-		
-		entityManager.createNativeQuery("delete from documento where id ="+id).executeUpdate();
-		transaction.commit();
+
+	/*@ public normal_behavior
+	  @ requires  entidade!=null && this.contains(entidade);
+	  @ ensures \result ==true;
+	  @ ensures !contains(entidade);
+	  @ ensures (\forall Documento i; i!=entidade ;contains(i)<==>\old(contains(i)));
+	  @ ensures documentos.size() == \old(documentos.size())-1;
+	  */
+	public boolean remover(Documento entidade) {
+		documentos.remove(entidade);
+		return true;
 	}
 }
