@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -30,29 +29,42 @@ public class DocumentoMBean implements Serializable {
 	
 	private String contestacao;
 	
-	@Inject
 	private DocumentoRepositorio documentoRepositorio;
 	
 	private Part arquivo;
 
+	public DocumentoMBean() {
+		documento = new Documento();
+		documentoRepositorio = new DocumentoRepositorio();
+	}
+	
+	/*@ 
+	@ 	requires documento2 != null;
+	@   requires documentoRepositorio != null;
+	@*/
 	public void salvar() {
 		documentoRepositorio.salvar(documento);
 	}
+	
+	/*@ 
+	@ 	requires documento2 != null;
+	@   requires documentoRepositorio != null;
+	@*/
 	
 	public String salvar(Documento documento) {
 		documentoRepositorio.salvar(documento);
 		return null;
 	}
 	
-	public String download(Documento documento) {
-		Documento documentoBd = documentoRepositorio.getDocumento(documento.getNome());
+	public String download(Documento documento2) {
+		Documento documentoBd = documentoRepositorio.getDocumento(documento2.getNome());
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 		response.addHeader("Content-Disposition", "attachment; filename="+documentoBd.getNome()+"siac."+documentoBd.getExtensao());
 		response.setContentType("application/octet-stream");
 		response.setContentLength(documentoBd.getArquivoBase64Original().length);
 		try {
-			response.getOutputStream().write(documento.getArquivoBase64Original());
+			response.getOutputStream().write(documento2.getArquivoBase64Original());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -67,6 +79,7 @@ public class DocumentoMBean implements Serializable {
 	
 	/*@ 
 	@ 	requires documento2 != null;
+	@   requires documentoRepositorio != null;
 	@*/
 	public void contestar(Documento documento2) {
 		Contestacao contestacaoOb = new Contestacao();
@@ -82,24 +95,27 @@ public class DocumentoMBean implements Serializable {
 		}
 		documentoRepositorio.salvar(documento2);
 	}
-	public DocumentoMBean() {
-		documento = new Documento();
-	}
 	
 	public Documento getDocumento() {
 		return documento;
 	}
 
-	public void setDocumento(Documento documento) {
-		this.documento = documento;
+	/*@ 
+	@ 	requires documento2 != null;
+	@*/
+	public void setDocumento(Documento documento2) {
+		this.documento = documento2;
 	}
 
 	public Part getArquivo() {
 		return arquivo;
 	}
 
-	public void setArquivo(Part arquivo) {
-		this.arquivo = arquivo;
+	/*@ 
+	@ 	requires arquivo2 != null;
+	@*/
+	public void setArquivo(Part arquivo2) {
+		this.arquivo = arquivo2;
 	}
 
 	public static long getSerialversionuid() {
@@ -110,7 +126,18 @@ public class DocumentoMBean implements Serializable {
 		return contestacao;
 	}
 
-	public void setContestacao(String contestacao) {
-		this.contestacao = contestacao;
+	/*@ 
+	@ 	requires contestacao != null;
+	@*/
+	public void setContestacao(String contestacao2) {
+		this.contestacao = contestacao2;
+	}
+
+	public DocumentoRepositorio getDocumentoRepositorio() {
+		return documentoRepositorio;
+	}
+
+	public void setDocumentoRepositorio(DocumentoRepositorio documentoRepositorio) {
+		this.documentoRepositorio = documentoRepositorio;
 	}
 }
