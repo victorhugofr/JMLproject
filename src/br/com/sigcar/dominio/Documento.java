@@ -21,35 +21,39 @@ public class Documento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private /*@ spec public @*/ int id;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusDocumento status;
+	private /*@ spec public @*/ StatusDocumento status;
 	
-	private String observacao;
-	
-	@OneToMany
-	private List<Contestacao> contestacoes;
+	private /*@ spec public @*/ String observacao;
 	
 	@OneToMany
-	private List<Correcao> correcao;
+	private /*@ spec public @*/ List<Contestacao> contestacoes;
 	
-	private String nome;
+	@OneToMany
+	private /*@ spec public @*/ List<Correcao> correcao;
+	
+	private /*@ spec public @*/ String nome;
 
 	@Column(columnDefinition="text")
-	private String arquivoBase64;
+	private /*@ spec public @*/ String arquivoBase64;
 	
-	private String extensao; //pdf,docx
+	private /*@ spec public @*/ String extensao; //pdf,docx
 	
 	@Lob
 	@Basic(fetch=FetchType.LAZY)
-	private byte[] arquivoBase64Original;
+	private /*@ spec public @*/ byte[] arquivoBase64Original;
 	
 	
 	public String getArquivoBase64() {
 		return arquivoBase64;
 	}
 
+	/*@ requires arquivoBase64 != null;
+	 *@ assignable this.arquivoBase64;
+	 *@ ensures this.arquivoBase64 == arquivoBase64;
+	 */
 	public void setArquivoBase64(String arquivoBase64) {
 		this.arquivoBase64 = arquivoBase64;
 	}
@@ -58,6 +62,10 @@ public class Documento {
 		return extensao;
 	}
 
+	/*@ requires extensao != null;
+	 *@ assignable this.extensao;
+	 *@ ensures this.extensao == extensao;
+	 */
 	public void setExtensao(String extensao) {
 		this.extensao = extensao;
 	}
@@ -65,7 +73,10 @@ public class Documento {
 	public byte[] getArquivoBase64Original() {
 		return arquivoBase64Original;
 	}
-
+	/*@ requires arquivoBase64Original != null;
+	 *@ assignable this.arquivoBase64Original;
+	 *@ ensures this.arquivoBase64Original == arquivoBase64Original; 
+	 */
 	public void setArquivoBase64Original(byte[] arquivoBase64Original) {
 		this.arquivoBase64Original = arquivoBase64Original;
 	}
@@ -74,6 +85,10 @@ public class Documento {
 		return id;
 	}
 
+	/*@ requires id != null;
+	 *@ assignable this.id;
+	 *@ ensures this.id == id; 
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -82,7 +97,11 @@ public class Documento {
 	public String getObservacao() {
 		return observacao;
 	}
-
+	
+	/*@ requires observacao != null;
+	 *@ assignable this.observacao;
+	 *@ ensures this.observacao == observacao; 
+	 */
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
@@ -91,6 +110,10 @@ public class Documento {
 		return nome;
 	}
 
+	/*@ requires nome != null;
+	 *@ assignable this.nome;
+	 *@ ensures this.nome == nome; 
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -99,6 +122,10 @@ public class Documento {
 		return status;
 	}
 
+	/*@ requires status != null;
+	 *@ assignable this.status;
+	 *@ ensures this.status == status; 
+	 */
 	public void setStatus(StatusDocumento status) {
 		this.status = status;
 	}
@@ -107,6 +134,10 @@ public class Documento {
 		return contestacoes;
 	}
 
+	/*@ requires contestacao != constestacao;
+	 *@ assignable this.contestacoes;
+	 *@ ensures this.contestacoes == contestacao; 
+	 */
 	public void setContestacao(List<Contestacao> contestacao) {
 		this.contestacoes = contestacao;
 	}
@@ -114,7 +145,11 @@ public class Documento {
 	public List<Correcao> getCorrecao() {
 		return correcao;
 	}
-
+	
+	/*@ requires correcao != null;
+	 *@ assignable this.correcao;
+	 *@ ensures this.correcao == correcao; 
+	 */
 	public void setCorrecao(List<Correcao> correcao) {
 		this.correcao = correcao;
 	}

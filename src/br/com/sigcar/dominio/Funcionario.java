@@ -34,6 +34,9 @@ public class Funcionario extends Usuario{
 		this.dataAdmissao = dataAdmissao;
 	}
 	
+	/*@ requires dataAdmissao != null;
+	 *@ 
+	 */
 	public void setDataAdmissao(String dataAdmissao) throws ParseException {
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd"); 
 		Date data = formato.parse(dataAdmissao);
