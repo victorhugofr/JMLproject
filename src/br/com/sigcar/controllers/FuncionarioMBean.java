@@ -9,11 +9,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.sigcar.dominio.Funcionario;
-import br.com.sigcar.exceptions.NegocioException;
 import br.com.sigcar.repositorios.FuncionarioRepositorio;
 
 @Named("funcionarioMBean")
@@ -26,6 +24,11 @@ public class FuncionarioMBean implements Serializable {
 	private Funcionario funcionarioLogado;
 	private DataModel<Funcionario> funcionariosModel;
 
+	public FuncionarioMBean() {
+		funcionario = new Funcionario();
+		funcionarioRepositorio = new FuncionarioRepositorio();
+	}
+	
 	public DataModel<Funcionario> getUsuariosModel() {
 		return funcionariosModel;
 	}
@@ -117,7 +120,4 @@ public class FuncionarioMBean implements Serializable {
 		this.funcionarioLogado = funcionarioLogado;
 	}
 
-	public FuncionarioMBean() {
-		funcionario = new Funcionario();
-	}
 }
