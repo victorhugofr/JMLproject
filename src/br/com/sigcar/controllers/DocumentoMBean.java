@@ -54,32 +54,33 @@ public class DocumentoMBean implements Serializable {
 		try {
 			response.getOutputStream().write(documento.getArquivoBase64Original());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			response.getOutputStream().flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		FacesContext.getCurrentInstance().responseComplete();
 		return null;
 	}
 	
-	public void contestar(Documento documento) {
+	/*@ 
+	@ 	requires documento2 != null;
+	@*/
+	public void contestar(Documento documento2) {
 		Contestacao contestacaoOb = new Contestacao();
 		contestacaoOb.setTexto(contestacao);
 		ContestacaoRepositorio contestacaoRepositorio = new ContestacaoRepositorio();
 		contestacaoRepositorio.salvar(contestacaoOb);
 		try {
-			documento.getContestacao().add(contestacaoOb);
+			documento2.getContestacao().add(contestacaoOb);
 		}catch(NullPointerException e) {
 			List<Contestacao> contestacoes = new ArrayList<Contestacao>();
 			contestacoes.add(contestacaoOb);
-			documento.setContestacao(contestacoes);
+			documento2.setContestacao(contestacoes);
 		}
-		documentoRepositorio.salvar(documento);
+		documentoRepositorio.salvar(documento2);
 	}
 	public DocumentoMBean() {
 		documento = new Documento();

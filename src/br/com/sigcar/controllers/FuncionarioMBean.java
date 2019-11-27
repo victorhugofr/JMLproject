@@ -14,15 +14,14 @@ import javax.inject.Named;
 
 import br.com.sigcar.dominio.Funcionario;
 import br.com.sigcar.exceptions.NegocioException;
-import br.com.sigcar.negocio.FuncionarioService;
+import br.com.sigcar.repositorios.FuncionarioRepositorio;
 
 @Named("funcionarioMBean")
 @SessionScoped
 public class FuncionarioMBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	@Inject
-	private FuncionarioService funcionarioService;
+	private FuncionarioRepositorio funcionarioRepositorio;
 	private Funcionario funcionario;
 	private Funcionario funcionarioLogado;
 	private DataModel<Funcionario> funcionariosModel;
@@ -36,18 +35,17 @@ public class FuncionarioMBean implements Serializable {
 	}
 
 	public String logar() {	
-		try {
-			System.out.println("estou aqui");
-			Funcionario funcionarioBd = funcionarioService.logar(funcionario);
-			funcionarioLogado = funcionarioBd;
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("funcionarioLogado", funcionarioLogado);
-			return "/pages/index.jsf?faces-redirect=true";
-		} catch (NegocioException e) {
-			FacesMessage msg = new FacesMessage(e.getMessage(),"");
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-			return null;
-		}
+			Funcionario funcionarioBd = funcionarioRepositorio.getFuncionario(funcionario.getLogin());
+			if (funcionarioBd != null && funcionarioBd.getSenha().equals(funcionario.getSenha())) {
+				funcionarioLogado = funcionarioBd;
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("funcionarioLogado", funcionarioLogado);
+				return "/pages/index.jsf?faces-redirect=true";
+			}else {
+				FacesMessage msg = new FacesMessage("Funcionario nao encontrado ou senha incorreta","");
+				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+				return "/pages/funcionarios/novo.jsf";
+			}
 	}
 
 	public String deslogar() {
@@ -68,37 +66,39 @@ public class FuncionarioMBean implements Serializable {
 	}
 
 	public String listarFuncionarios() {
-		funcionariosModel = new ListDataModel<Funcionario>(funcionarioService.listar());
+		funcionariosModel = new ListDataModel<Funcionario>(funcionarioRepositorio.listarFuncionarios());
 
 		return "/pages/funcionarios/list.jsf?faces-redirect=true";
 	}
 	
 	public String removerFuncionario() {
 		Funcionario usuarioRemovido = funcionariosModel.getRowData();
-		funcionarioService.remover(usuarioRemovido);
+		funcionarioRepositorio.remover(usuarioRemovido);
 		//return listarMateriais();
-		funcionariosModel = new ListDataModel<Funcionario>(funcionarioService.listar());
+		funcionariosModel = new ListDataModel<Funcionario>(funcionarioRepositorio.listarFuncionarios());
 		return "/pages/funcionarios/list.jsf";
 	}
 
 	public String cadastrar() {
 		Date dataCadastro = new Date();
 		funcionario.setDataCadastro(dataCadastro);
-		try {
-			funcionarioService.adicionar(funcionario);
-		} catch (NegocioException e) {
-			FacesMessage msg = new FacesMessage(e.getMessage(),"");
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		Funcionario funcionarioBd = funcionarioRepositorio.getFuncionario(funcionario.getLogin());
+		if(funcionarioBd == null) {
+			funcionarioRepositorio.salvar(funcionario);
+			FacesMessage msg = new FacesMessage("Cadastro realizado com sucesso.","");
+			msg.setSeverity(FacesMessage.SEVERITY_INFO);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
-			return "/pages/funcionarios/novo.jsf";
-
+			funcionario=new Funcionario();
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("funcionarioLogado", funcionario);
+			return "/pages/index.jsf";
+		}else {
+			FacesMessage msg = new FacesMessage("O funcionario ja existe.","");
+			msg.setSeverity(FacesMessage.SEVERITY_INFO);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			funcionario=new Funcionario();
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("funcionarioLogado", funcionario);
+			return "/pages/index.jsf";
 		}
-		FacesMessage msg = new FacesMessage("Cadastro realizado com sucesso.","");
-		msg.setSeverity(FacesMessage.SEVERITY_INFO);
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		funcionario=new Funcionario();
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("funcionarioLogado", funcionario);
-		return "/pages/index.jsf";
 	}
 
 	public Funcionario getFuncionario() {
