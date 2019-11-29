@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.sigcar.dominio.Contestacao;
+import br.com.sigcar.exceptions.NegocioException;
 public class ContestacaoRepositorio {
 
 	private /*@ spec_public @*/ List<Contestacao> contestacoes;
@@ -45,6 +46,9 @@ public class ContestacaoRepositorio {
 	  @ ensures contestacoes.size() == \old(contestacoes.size())+1;
 	  */
 	public boolean salvar(Contestacao entidade) {
+		if(entidade == null || this.contains(entidade)) {
+			return false;
+		}
 		contestacoes.add(entidade);
 		return true;
 	}

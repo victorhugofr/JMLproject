@@ -44,6 +44,8 @@ public class DocumentoRepositorio {
 	  @ ensures documentos.size() == \old(documentos.size())+1;
 	  */
 	public boolean salvar(Documento entidade) {
+		if(entidade == null || this.contains(entidade))
+			return false;
 		documentos.add(entidade);
 		return true;
 	}

@@ -14,6 +14,7 @@ import javax.servlet.http.Part;
 
 import br.com.sigcar.dominio.Contestacao;
 import br.com.sigcar.dominio.Documento;
+import br.com.sigcar.exceptions.NegocioException;
 import br.com.sigcar.negocio.ContestacaoService;
 import br.com.sigcar.negocio.DocumentoService;
 
@@ -36,16 +37,26 @@ public class DocumentoMBean implements Serializable {
 	private Part arquivo;
 
 	public void salvar() {
-		documentoService.adicionar(documento);
+		try {
+			documentoService.adicionar(documento);
+		} catch (NegocioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String salvar(Documento documento) {
-		documentoService.adicionar(documento);
+		try {
+			documentoService.adicionar(documento);
+		} catch (NegocioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
 	public String download(Documento documento) {
-		Documento documentoBd = documentoService.Buscar(documento);
+		Documento documentoBd = documentoService.buscar(documento);
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 		response.addHeader("Content-Disposition", "attachment; filename="+documentoBd.getNome()+"siac."+documentoBd.getExtensao());
@@ -71,7 +82,12 @@ public class DocumentoMBean implements Serializable {
 		Contestacao contestacaoOb = new Contestacao();
 		contestacaoOb.setTexto(contestacao);
 		ContestacaoService contestacaoService = new ContestacaoService();
-		contestacaoService.adicionar(contestacaoOb);
+		try {
+			contestacaoService.adicionar(contestacaoOb);
+		} catch (NegocioException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			documento.getContestacao().add(contestacaoOb);
 		}catch(NullPointerException e) {
@@ -79,7 +95,12 @@ public class DocumentoMBean implements Serializable {
 			contestacoes.add(contestacaoOb);
 			documento.setContestacao(contestacoes);
 		}
-		documentoService.adicionar(documento);
+		try {
+			documentoService.adicionar(documento);
+		} catch (NegocioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public DocumentoMBean() {
 		documento = new Documento();
