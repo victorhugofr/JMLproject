@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -14,7 +15,8 @@ import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
 import br.com.sigcar.dominio.Usuario;
-import br.com.sigcar.repositorios.UsuarioRepositorio;
+import br.com.sigcar.exceptions.NegocioException;
+import br.com.sigcar.negocio.UsuarioService;
 
 @Named("usuarioMBean")
 @SessionScoped
@@ -24,7 +26,8 @@ public class UsuarioMBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	UsuarioRepositorio usuarioRepositorio;
+	@EJB
+	private UsuarioService usuarioService;
 	
 	private Usuario usuario;
 	private Usuario usuarioLogado;
@@ -32,7 +35,7 @@ public class UsuarioMBean implements Serializable {
 	private List<Usuario> usuariosList;
 	
 	public List<Usuario> getUsuariosList() {
-		usuariosList = new ArrayList<Usuario>(usuarioRepositorio.listarUsuarios());
+		usuariosList = new ArrayList<Usuario>(usuarioService.listar());
 		return usuariosList;
 	}
 
@@ -49,17 +52,17 @@ public class UsuarioMBean implements Serializable {
 	}
 
 	public String logar() {
-			Usuario usuarioBd = usuarioRepositorio.getUsuario(usuario.getLogin());
-			if (usuarioBd != null && usuarioBd.getSenha().equals(usuario.getSenha())) {
-				usuarioLogado = usuarioBd;
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuarioLogado);
-				return "/pages/index.jsf?faces-redirect=true";
-			}else {
-				FacesMessage msg = new FacesMessage("Usuario nao encontrado ou senha incorreta","");
-				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-				FacesContext.getCurrentInstance().addMessage(null, msg);
-				return "/login/cadastrar.jsf";
-			}
+		try {
+			Usuario usuarioBd = usuarioService.logar(usuario);
+			usuarioLogado = usuarioBd;
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuarioLogado);
+			return "/pages/index.jsf?faces-redirect=true";
+		} catch (NegocioException e) {
+			FacesMessage msg = new FacesMessage(e.getMessage(),"");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			return null;
+		}
 	}
 
 	public String deslogar() {
@@ -80,61 +83,59 @@ public class UsuarioMBean implements Serializable {
 	}
 
 	public String listarUsuarios() {
-		usuariosModel = new ListDataModel<Usuario>(usuarioRepositorio.listarUsuarios());
+		usuariosModel = new ListDataModel<Usuario>(usuarioService.listar());
 
 		return "/pages/usuarios/list.jsf?faces-redirect=true";
 	}
 	
 	public String removerUsuario() {
 		Usuario usuarioRemovido = usuariosModel.getRowData();
-		usuarioRepositorio.remover(usuarioRemovido);
+		usuarioService.remover(usuarioRemovido);
 		//return listarMateriais();
-		usuariosModel = new ListDataModel<Usuario>(usuarioRepositorio.listarUsuarios());
+		usuariosModel = new ListDataModel<Usuario>(usuarioService.listar());
 		return "/pages/usuarios/list.jsf";
 	}
 
 	public String cadastrar() {
 		Date dataCadastro = new Date();
 		usuario.setDataCadastro(dataCadastro);
-		Usuario usuarioBd = usuarioRepositorio.getUsuario(usuario.getLogin());
-		if(usuarioBd == null) {
-			usuarioRepositorio.salvar(usuario);
-			FacesMessage msg = new FacesMessage("Cadastro realizado com sucesso.","");
-			msg.setSeverity(FacesMessage.SEVERITY_INFO);
+		try {
+			usuarioService.adicionar(usuario);
+		} catch (NegocioException e) {
+			FacesMessage msg = new FacesMessage(e.getMessage(),"");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
-			usuario = new Usuario();
-		}else {
-			FacesMessage msg = new FacesMessage("O usuário ja existe.","");
-			msg.setSeverity(FacesMessage.SEVERITY_INFO);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+			return "/login/cadastrar.jsf";
 		}
-		
+		FacesMessage msg = new FacesMessage("Cadastro realizado com sucesso.","");
+		msg.setSeverity(FacesMessage.SEVERITY_INFO);
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		usuario = new Usuario();
 		return "/login/login.jsf";
 	}
 
 	public String cadastrarLogado() {
 		Date dataCadastro = new Date();
 		usuario.setDataCadastro(dataCadastro);
-		Usuario usuarioBd = usuarioRepositorio.getUsuario(usuario.getLogin());
-		if(usuarioBd == null) {
-			usuarioRepositorio.salvar(usuario);
-			FacesMessage msg = new FacesMessage("Cadastro realizado com sucesso.","");
-			msg.setSeverity(FacesMessage.SEVERITY_INFO);
+		try {
+			usuarioService.adicionar(usuario);
+		} catch (NegocioException e) {
+			FacesMessage msg = new FacesMessage(e.getMessage(),"");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
-			usuario = new Usuario();
-		}else {
-			FacesMessage msg = new FacesMessage("O usuário ja existe.","");
-			msg.setSeverity(FacesMessage.SEVERITY_INFO);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+			return "/pages/usuarios/novo.jsf";
 		}
+		FacesMessage msg = new FacesMessage("Cadastro realizado com sucesso.","");
+		msg.setSeverity(FacesMessage.SEVERITY_INFO);
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 		usuario = new Usuario();
 //		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioLogado", usuario);
 		return "/pages/index.jsf";
 	}
 	
 	public String AtualizarDadosUsuario() {
-		usuarioRepositorio.salvar(usuarioLogado);
-		FacesMessage msg = new FacesMessage("Dados do usuario atualizados","");
+		usuarioService.atualizar(usuarioLogado);
+		FacesMessage msg = new FacesMessage("Dados do usurio atualizados","");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		return "/pages/index.jsf/faces-redirect=true";
 	}
@@ -156,7 +157,7 @@ public class UsuarioMBean implements Serializable {
 	}
 
 	public List<Usuario> getUsuarioList() {
-		usuariosList = new ArrayList<Usuario>(usuarioRepositorio.listarUsuarios());
+		usuariosList = new ArrayList<Usuario>(usuarioService.listar());
 		return usuariosList;
 	}
 	

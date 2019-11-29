@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -13,8 +14,8 @@ import javax.servlet.http.Part;
 
 import br.com.sigcar.dominio.Contestacao;
 import br.com.sigcar.dominio.Documento;
-import br.com.sigcar.repositorios.ContestacaoRepositorio;
-import br.com.sigcar.repositorios.DocumentoRepositorio;
+import br.com.sigcar.negocio.ContestacaoService;
+import br.com.sigcar.negocio.DocumentoService;
 
 @Named("documentoMBean")
 @SessionScoped
@@ -29,93 +30,75 @@ public class DocumentoMBean implements Serializable {
 	
 	private String contestacao;
 	
-	private DocumentoRepositorio documentoRepositorio;
+	@EJB
+	private DocumentoService documentoService;
 	
 	private Part arquivo;
 
-	public DocumentoMBean() {
-		documento = new Documento();
-		documentoRepositorio = new DocumentoRepositorio();
-	}
-	
-	/*@ 
-	@ 	requires documento2 != null;
-	@   requires documentoRepositorio != null;
-	@*/
 	public void salvar() {
-		documentoRepositorio.salvar(documento);
+		documentoService.adicionar(documento);
 	}
-	
-	/*@ 
-	@ 	requires documento2 != null;
-	@   requires documentoRepositorio != null;
-	@*/
 	
 	public String salvar(Documento documento) {
-		documentoRepositorio.salvar(documento);
+		documentoService.adicionar(documento);
 		return null;
 	}
 	
-	public String download(Documento documento2) {
-		Documento documentoBd = documentoRepositorio.getDocumento(documento2.getNome());
+	public String download(Documento documento) {
+		Documento documentoBd = documentoService.Buscar(documento);
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 		response.addHeader("Content-Disposition", "attachment; filename="+documentoBd.getNome()+"siac."+documentoBd.getExtensao());
 		response.setContentType("application/octet-stream");
 		response.setContentLength(documentoBd.getArquivoBase64Original().length);
 		try {
-			response.getOutputStream().write(documento2.getArquivoBase64Original());
+			response.getOutputStream().write(documento.getArquivoBase64Original());
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			response.getOutputStream().flush();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		FacesContext.getCurrentInstance().responseComplete();
 		return null;
 	}
 	
-	/*@ 
-	@ 	requires documento2 != null;
-	@   requires documentoRepositorio != null;
-	@*/
-	public void contestar(Documento documento2) {
+	public void contestar(Documento documento) {
 		Contestacao contestacaoOb = new Contestacao();
 		contestacaoOb.setTexto(contestacao);
-		ContestacaoRepositorio contestacaoRepositorio = new ContestacaoRepositorio();
-		contestacaoRepositorio.salvar(contestacaoOb);
+		ContestacaoService contestacaoService = new ContestacaoService();
+		contestacaoService.adicionar(contestacaoOb);
 		try {
-			documento2.getContestacao().add(contestacaoOb);
+			documento.getContestacao().add(contestacaoOb);
 		}catch(NullPointerException e) {
 			List<Contestacao> contestacoes = new ArrayList<Contestacao>();
 			contestacoes.add(contestacaoOb);
-			documento2.setContestacao(contestacoes);
+			documento.setContestacao(contestacoes);
 		}
-		documentoRepositorio.salvar(documento2);
+		documentoService.adicionar(documento);
+	}
+	public DocumentoMBean() {
+		documento = new Documento();
 	}
 	
 	public Documento getDocumento() {
 		return documento;
 	}
 
-	/*@ 
-	@ 	requires documento2 != null;
-	@*/
-	public void setDocumento(Documento documento2) {
-		this.documento = documento2;
+	public void setDocumento(Documento documento) {
+		this.documento = documento;
 	}
 
 	public Part getArquivo() {
 		return arquivo;
 	}
 
-	/*@ 
-	@ 	requires arquivo2 != null;
-	@*/
-	public void setArquivo(Part arquivo2) {
-		this.arquivo = arquivo2;
+	public void setArquivo(Part arquivo) {
+		this.arquivo = arquivo;
 	}
 
 	public static long getSerialversionuid() {
@@ -126,18 +109,7 @@ public class DocumentoMBean implements Serializable {
 		return contestacao;
 	}
 
-	/*@ 
-	@ 	requires contestacao != null;
-	@*/
-	public void setContestacao(String contestacao2) {
-		this.contestacao = contestacao2;
-	}
-
-	public DocumentoRepositorio getDocumentoRepositorio() {
-		return documentoRepositorio;
-	}
-
-	public void setDocumentoRepositorio(DocumentoRepositorio documentoRepositorio) {
-		this.documentoRepositorio = documentoRepositorio;
+	public void setContestacao(String contestacao) {
+		this.contestacao = contestacao;
 	}
 }

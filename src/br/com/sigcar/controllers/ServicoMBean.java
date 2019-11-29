@@ -8,12 +8,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.xml.bind.DatatypeConverter;
 
@@ -25,8 +25,8 @@ import br.com.sigcar.dominio.Servico;
 import br.com.sigcar.dominio.Usuario;
 import br.com.sigcar.enums.StatusDocumento;
 import br.com.sigcar.enums.TipoServico;
-import br.com.sigcar.repositorios.DocumentoRepositorio;
-import br.com.sigcar.repositorios.ServicoRepositorio;
+import br.com.sigcar.exceptions.NegocioException;
+import br.com.sigcar.negocio.ServicoService;
 
 @Named("servicoMBean")
 @SessionScoped
@@ -37,11 +37,8 @@ public class ServicoMBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Inject
-	private ServicoRepositorio servicoRepositorio;
-	
-	@Inject
-	private DocumentoRepositorio documentoRepositorio;
+	@EJB
+	private ServicoService servicoService;
 	
 	private Servico servico;
 	
@@ -66,41 +63,27 @@ public class ServicoMBean implements Serializable {
 	public ServicoMBean() {
 		servico=new Servico();
 		usuario=new Usuario();
-		documentos = new ArrayList<Documento>();
 		servicoAcompanhar= new Servico();
 		servicoCorrigir= new Servico();
 	}
 	public String listarServicos() {
-		servicosModel = new ListDataModel<Servico>(servicoRepositorio.listarServicos());
-
+		servicosModel = new ListDataModel<Servico>(servicoService.listar());
 		return "/pages/servicos/list.jsf?faces-redirect=true";
 	}
 	
+	
 	public String abrirServico(){
-		Servico servicoBd = servicoRepositorio.getServico(servico.getNomeEntidade());
-		
-		if(servicoBd == null) { //alterar depois, tem um bug, pois um usuario pode ter varios servicos para uma mesma entidade
-			for(int i=0;i<documentos.size();i++) {
-				documentoRepositorio.salvar(documentos.get(i));
-			}
-			if(documentos==null) {
-				FacesMessage msg = new FacesMessage("Insira um documento","");
-				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-				FacesContext.getCurrentInstance().addMessage(null, msg);
-				return null;
-			}
-			servico.setDocumentos(documentos);
-			servico.setStatus(true);
-			servicoRepositorio.salvar(servico);
+		try {
+			servicoService.adicionar(servico, documentos);
 			servico=new Servico();
-			servicoBd=null;
+			documentos=null;
 			FacesMessage msg = new FacesMessage("Servico aberto com sucesso","");
 			msg.setSeverity(FacesMessage.SEVERITY_INFO);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 			return "/pages/index.jsf?faces-redirect=true";
-		}else {
-			FacesMessage msg = new FacesMessage("Servico ja est� aberto","");
+		} catch (NegocioException e) {
+			FacesMessage msg = new FacesMessage(e.getMessage(),"");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return null;
@@ -144,6 +127,7 @@ public class ServicoMBean implements Serializable {
 		documento.setArquivoBase64(miniArquivo);
 		documento.setNome(arquivo.getFileName());
 		documento.setStatus(StatusDocumento.AGUARDANDO_CORRECAO);
+		documentos = new ArrayList<Documento>();
 		documentos.add(documento);
 	}
 	
