@@ -26,11 +26,15 @@ public class ServicoService {
 	public ServicoService() {
 		
 	}
-	
-	public ServicoService(DocumentoRepositorio documentoRepositorio, ServicoRepositorio servicoRepositorio) {
-		this.documentoRepositorio=documentoRepositorio;
-		this.servicoRepositorio=servicoRepositorio;
+	/*@ 
+	  @ requires documentoRepositorio2 != null;
+	  @ requires servicoRepositorio2 != null;
+	  @*/
+	public ServicoService(DocumentoRepositorio documentoRepositorio2, ServicoRepositorio servicoRepositorio2) {
+		this.documentoRepositorio=documentoRepositorio2;
+		this.servicoRepositorio=servicoRepositorio2;
 	}
+	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Servico adicionar(Servico servico, List<Documento> documentos)  throws NegocioException {			
 		Servico servicoBd = servicoRepositorio.getServico(servico.getNomeEntidade());
@@ -48,16 +52,22 @@ public class ServicoService {
 			servicoBd=null;
 		}else {
 			throw new
-			NegocioException("Servico j est aberto");
+			NegocioException("Servico ja esta aberto");
 		}
 		return servico;
 	}
 	
+	/*@ 
+	  @ requires servicoRepositorio != null;
+	  @*/
 	public Servico buscar(Servico servico) {
 		Servico servicoBd = servicoRepositorio.getServico(servico.getNomeEntidade());
 		return servicoBd;
 	}
 	
+	/*@ 
+	  @ requires servicoRepositorio != null;
+	  @*/
 	public List<Servico> listar() {
 		return servicoRepositorio.listarServicos();
 	}
