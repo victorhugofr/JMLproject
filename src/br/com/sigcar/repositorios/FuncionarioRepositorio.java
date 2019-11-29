@@ -26,7 +26,7 @@ public class FuncionarioRepositorio {
 		return false;
 	}
 	
-	public  Funcionario getFuncionario(String login) {
+	public /*@ pure @*/ Funcionario getFuncionario(String login) {
 		for (Funcionario u : funcionarios) {
 			if (u.getLogin().equals(login)) {
 				return u;

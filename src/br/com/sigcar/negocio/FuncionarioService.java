@@ -34,7 +34,7 @@ public class FuncionarioService {
 	  @   ensures \result == funcionario;
 	  @ also
 	  @  public exceptional_behavior
-	  @   requires !funcionarioRepositorio.salvar(funcionario);
+	  @   requires funcionarioRepositorio.contains(funcionario);
 	  @   signals_only NegocioException;
 	  @*/
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -53,7 +53,7 @@ public class FuncionarioService {
 	  @   requires funcionarioRepositorio!=null;
 	  @ also
 	  @  public exceptional_behavior
-	  @   requires !funcionarioRepositorio.remover(funcionario);
+	  @   requires !funcionarioRepositorio.contains(funcionario);
 	  @   signals_only NegocioException;
 	  @*/
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -81,13 +81,13 @@ public class FuncionarioService {
 	/*@  public normal_behavior
 	  @   requires funcionario != null;
 	  @   requires funcionarioRepositorio!=null;
-	  @	  requires funcinarioRepositorio.getFuncionario(funcionario.getLogin()).getSenha().equals(funcionario.getSenha());
+	  @	  requires funcionarioRepositorio.getFuncionario(funcionario.getLogin()).getSenha().equals(funcionario.getSenha());
 	  @   ensures \result == funcionario;
 	  @ also
 	  @  public exceptional_behavior
 	  @   requires funcionario != null;
 	  @   requires funcionarioRepositorio!=null;
-	  @   requires !funcinarioRepositorio.getFuncionario(funcionario.getLogin()).getSenha().equals(funcionario.getSenha());
+	  @   requires !funcionarioRepositorio.getFuncionario(funcionario.getLogin()).getSenha().equals(funcionario.getSenha());
 	  @   signals_only NegocioException;
 	  @   signals (NegocioException e)
 	  @               e.getMessage().equals("Senha incorreta");
@@ -95,7 +95,7 @@ public class FuncionarioService {
 	  @  public exceptional_behavior
 	  @   requires funcionario != null;
 	  @   requires funcionarioRepositorio!=null;
-	  @   requires funcinarioRepositorio.getFuncionario(funcionario.getLogin()) == null;
+	  @   requires funcionarioRepositorio.getFuncionario(funcionario.getLogin()) == null;
 	  @   signals_only NegocioException;
 	  @   signals (NegocioException e)
 	  @               e.getMessage().equals("Funcionario nao encontrado");

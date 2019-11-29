@@ -18,10 +18,10 @@ import br.com.sigcar.repositorios.ServicoRepositorio;
 public class ServicoService {
 	
 	@Inject
-	private ServicoRepositorio servicoRepositorio = new ServicoRepositorio();//new pois o JML não inicia o inject
+	private /*@ spec_public @*/ ServicoRepositorio servicoRepositorio = new ServicoRepositorio();//new pois o JML não inicia o inject
 	
 	@Inject
-	private DocumentoRepositorio documentoRepositorio = new DocumentoRepositorio();
+	private /*@ spec_public @*/ DocumentoRepositorio documentoRepositorio = new DocumentoRepositorio();
 	
 	public ServicoService() {
 		

@@ -32,7 +32,7 @@ public class DocumentoService {
 	  @   ensures \result == documento;
 	  @ also
 	  @  public exceptional_behavior
-	  @   requires !documentoRepositorio.salvar(documento);
+	  @   requires documentoRepositorio.contains(documento);
 	  @   signals_only NegocioException;
 	  @*/
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)

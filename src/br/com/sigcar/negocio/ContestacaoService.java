@@ -31,7 +31,7 @@ public class ContestacaoService {
 	  @   ensures \result == contestacao;
 	  @ also
 	  @  public exceptional_behavior
-	  @   requires !contestacaoRepositorio.salvar(contestacao);
+	  @   requires contestacaoRepositorio.contains(contestacao);
 	  @   signals_only NegocioException;
 	  @*/
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)

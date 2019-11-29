@@ -75,7 +75,12 @@ public class FuncionarioMBean implements Serializable {
 	
 	public String removerFuncionario() {
 		Funcionario usuarioRemovido = funcionariosModel.getRowData();
-		funcionarioService.remover(usuarioRemovido);
+		try {
+			funcionarioService.remover(usuarioRemovido);
+		} catch (NegocioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//return listarMateriais();
 		funcionariosModel = new ListDataModel<Funcionario>(funcionarioService.listar());
 		return "/pages/funcionarios/list.jsf";
