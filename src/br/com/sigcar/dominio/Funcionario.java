@@ -21,7 +21,7 @@ public class Funcionario extends Usuario{
 		super(login,senha);
 	}
 
-	public Date getDataAdmissao() {
+	public /*@ pure */ Date getDataAdmissao() {
 		return dataAdmissao;
 	}
 	
