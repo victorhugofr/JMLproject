@@ -29,9 +29,10 @@ public class Usuario {
 
 	public Usuario() {
 	}
-	//@ requires login != null && senha != null;
-	//@ assignable this.login, this.senha;
-	//@ ensures this.login == login && this.senha == senha;
+	/*@ requires login != "" && senha != null;
+	 @ assignable this.login, this.senha;
+	 @ ensures this.login == login && this.senha == senha;
+	 */
 	public Usuario(String login, String senha) {
 		this.login = login;
 		this.senha = senha;
@@ -40,9 +41,10 @@ public class Usuario {
 		return dataCadastro;
 	}
 	
-	//@ requires dataCadastro != null;
-	//@ assignable this.dataCadastro;
-	//@ ensures this.dataCadastro == dataCadastro;
+	/*@ requires dataCadastro != null;
+	@ assignable this.dataCadastro;
+	@ ensures this.dataCadastro == dataCadastro;
+	*/
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
@@ -62,7 +64,7 @@ public class Usuario {
 		return login;
 	}
 	
-	//@ requires login != null;
+	//@ requires login != "";
 	//@ assignable this.login;
 	//@ ensures this.login == login;
 	public void setLogin(String login) {
