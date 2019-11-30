@@ -6,7 +6,7 @@ import java.util.List;
 import br.com.sigcar.dominio.Usuario;
 
 public class UsuarioRepositorio {
-	public /*@ spec_public @*/  List<Usuario> usuarios;
+	private /*@ spec_public @*/  List<Usuario> usuarios;
 
 	
 	public UsuarioRepositorio() {

@@ -6,7 +6,7 @@ import java.util.List;
 import br.com.sigcar.dominio.Funcionario;
 
 public class FuncionarioRepositorio {
-	public /*@ spec_public @*/  List<Funcionario> funcionarios;
+	private /*@ spec_public @*/  List<Funcionario> funcionarios;
 
 	
 	public FuncionarioRepositorio() {
@@ -26,7 +26,7 @@ public class FuncionarioRepositorio {
 		return false;
 	}
 	
-	public  Funcionario getFuncionario(String login) {
+	public /*@ pure @*/ Funcionario getFuncionario(String login) {
 		for (Funcionario u : funcionarios) {
 			if (u.getLogin().equals(login)) {
 				return u;
@@ -43,6 +43,9 @@ public class FuncionarioRepositorio {
 	  @ ensures funcionarios.size() == \old(funcionarios.size())+1;
 	  */
 	public boolean salvar(Funcionario entidade) {
+		if(entidade == null || this.contains(entidade)) {
+			return false;
+		}
 		funcionarios.add(entidade);
 		return true;
 	}
@@ -59,6 +62,8 @@ public class FuncionarioRepositorio {
 	  @ ensures funcionarios.size() == \old(funcionarios.size())-1;
 	  */
 	public boolean remover(Funcionario entidade) {
+		if(entidade == null || !this.contains(entidade)) 
+			return false;
 		funcionarios.remove(entidade);
 		return true;
 	}

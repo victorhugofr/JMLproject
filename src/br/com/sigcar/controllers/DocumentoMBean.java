@@ -5,17 +5,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import br.com.sigcar.dominio.Contestacao;
 import br.com.sigcar.dominio.Documento;
-import br.com.sigcar.repositorios.ContestacaoRepositorio;
-import br.com.sigcar.repositorios.DocumentoRepositorio;
+import br.com.sigcar.exceptions.NegocioException;
+import br.com.sigcar.negocio.ContestacaoService;
+import br.com.sigcar.negocio.DocumentoService;
 
 @Named("documentoMBean")
 @SessionScoped
@@ -30,22 +31,32 @@ public class DocumentoMBean implements Serializable {
 	
 	private String contestacao;
 	
-	@Inject
-	private DocumentoRepositorio documentoRepositorio;
+	@EJB
+	private DocumentoService documentoService;
 	
 	private Part arquivo;
 
 	public void salvar() {
-		documentoRepositorio.salvar(documento);
+		try {
+			documentoService.adicionar(documento);
+		} catch (NegocioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String salvar(Documento documento) {
-		documentoRepositorio.salvar(documento);
+		try {
+			documentoService.adicionar(documento);
+		} catch (NegocioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
 	public String download(Documento documento) {
-		Documento documentoBd = documentoRepositorio.getDocumento(documento.getNome());
+		Documento documentoBd = documentoService.buscar(documento);
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
 		response.addHeader("Content-Disposition", "attachment; filename="+documentoBd.getNome()+"siac."+documentoBd.getExtensao());
@@ -54,33 +65,42 @@ public class DocumentoMBean implements Serializable {
 		try {
 			response.getOutputStream().write(documento.getArquivoBase64Original());
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			response.getOutputStream().flush();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		FacesContext.getCurrentInstance().responseComplete();
 		return null;
 	}
 	
-	/*@ 
-	@ 	requires documento2 != null;
-	@*/
-	public void contestar(Documento documento2) {
+	public void contestar(Documento documento) {
 		Contestacao contestacaoOb = new Contestacao();
 		contestacaoOb.setTexto(contestacao);
-		ContestacaoRepositorio contestacaoRepositorio = new ContestacaoRepositorio();
-		contestacaoRepositorio.salvar(contestacaoOb);
+		ContestacaoService contestacaoService = new ContestacaoService();
 		try {
-			documento2.getContestacao().add(contestacaoOb);
+			contestacaoService.adicionar(contestacaoOb);
+		} catch (NegocioException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			documento.getContestacao().add(contestacaoOb);
 		}catch(NullPointerException e) {
 			List<Contestacao> contestacoes = new ArrayList<Contestacao>();
 			contestacoes.add(contestacaoOb);
-			documento2.setContestacao(contestacoes);
+			documento.setContestacao(contestacoes);
 		}
-		documentoRepositorio.salvar(documento2);
+		try {
+			documentoService.adicionar(documento);
+		} catch (NegocioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public DocumentoMBean() {
 		documento = new Documento();
