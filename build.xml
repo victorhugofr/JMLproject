@@ -35,7 +35,7 @@
 	<property name="dest.dir"                  value="bin" />
 	<!-- Target directory to print the instrumented source code (isc) as AspectJ aspects -->
 	<property name="dest.dir.isc"              value="isc" />
-	<property name="main.class"                value="tests.MainFile" />
+	<property name="main.class"                value="tests1.TestUsuario							" />
 	<property name="app.lib"                   value="lib" />
 	<property name="aspectjml.lib"             value="aspectjml-lib" />
 	<!-- NOTE: 'aspectjml.lib' MUST INCLUDE THE ASPECTJ WEAVER, AJC -->

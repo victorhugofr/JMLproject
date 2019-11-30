@@ -23,23 +23,23 @@ public class Servico {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private /*@ spec public @*/int id;
+	private /*@ spec_public @*/int id;
 	
-	private /*@ spec public @*/ boolean status;
+	private /*@ spec_public @*/ boolean status;
 	
 	@Temporal(TemporalType.DATE)
-	private /*@ spec public @*/ Date dataSolicitacao;
+	private /*@ spec_public @*/ Date dataSolicitacao;
 	
-	private /*@ spec public @*/ String nomeEntidade;
+	private /*@ spec_public @*/ String nomeEntidade;
 	
 	@ManyToOne
-	private /*@ spec public @*/ Usuario usuario;
+	private /*@ spec_public @*/ Usuario usuario;
 	
 	@Enumerated(EnumType.STRING)
-	private /*@ spec public @*/ TipoServico tipoServico;
+	private /*@ spec_public @*/ TipoServico tipoServico;
 	
 	@OneToMany
-	private /*@ spec public @*/ List<Documento> documentos;
+	private /*@ spec_public @*/ List<Documento> documentos;
 
 	public Servico() {
 		
@@ -49,10 +49,9 @@ public class Servico {
 		return id;
 	}
 	
-	/*@ requires id != null;
-	 *@ assignable this.id 
-	 *@ ensures this.id == id;
-	 */
+	//@ requires id > 0;
+	//@ assignable this.id; 
+	//@ ensures this.id == id;
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -65,10 +64,9 @@ public class Servico {
 		return status;
 	}
 	
-	/*@ requires boolean != null;
-	 *@ assignable this.status;
-	 *@ ensures this.status == status; 
-	 */
+	
+	//@ assignable this.status;
+	//@ ensures this.status == status;
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
@@ -76,10 +74,9 @@ public class Servico {
 	public Date getDataSolicitacao() {
 		return dataSolicitacao;
 	}
-	/*@ requires dataSolicitacao != null;
-	 *@ assignable this.dadaSolicitacao;
-	 *@ ensures this.dataSolicitacao == dataSolicitacao; 
-	 */
+	//@ requires dataSolicitacao != null;
+	//@ assignable this.dataSolicitacao;
+	//@ ensures this.dataSolicitacao == dataSolicitacao; 
 	public void setDataSolicitacao(Date dataSolicitacao) {
 		this.dataSolicitacao = dataSolicitacao;
 	}
@@ -89,10 +86,9 @@ public class Servico {
 		return nomeEntidade;
 	}
 
-	/*@ requires nomeEntidade != null;
-	 *@ assignable this.nomeEntidade;
-	 *@ ensures this.nomeEntidade == nomeEntidade;
-	 */
+	//@ requires nomeEntidade != null;
+	//@ assignable this.nomeEntidade;
+	//@ ensures this.nomeEntidade == nomeEntidade;
 	public void setNomeEntidade(String nomeEntidade) {
 		this.nomeEntidade = nomeEntidade;
 	}
@@ -101,10 +97,9 @@ public class Servico {
 		return usuario;
 	}
 
-	/*@ requires usuario != null;
-	 *@ assignable this.usuario;
-	 *@ ensures this.usuario = usuario; 
-	 */
+	//@ requires usuario != null;
+	//@ assignable this.usuario;
+	//@ ensures this.usuario == usuario;
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
@@ -113,10 +108,9 @@ public class Servico {
 		return documentos;
 	}
 	
-	/*@ requires documentos != null;
-	 *@ assignable this.documentos;
-	 *@ ensures this.documentos == documentos; 
-	 */
+	//@ requires documentos != null;
+	//@ assignable this.documentos;
+	//@ ensures this.documentos == documentos;
 	public void setDocumentos(List<Documento> documentos) {
 		this.documentos = documentos;
 	}
@@ -125,10 +119,9 @@ public class Servico {
 		return tipoServico;
 	}
 	
-	/*@ requires tipoServico != null;
-	 *@ assingnable this.tipoServico;
-	 *@ ensures this.tipoServico == tipoServico; 
-	 */
+	//@ requires tipoServico != null;
+	//@ assignable this.tipoServico;
+	//@ ensures this.tipoServico == tipoServico;
 	public void setTipoServico(TipoServico tipoServico) {
 		this.tipoServico = tipoServico;
 	}

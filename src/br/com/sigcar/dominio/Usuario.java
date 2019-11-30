@@ -14,25 +14,24 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private /*@ spec public @*/ int id;
+	private /*@ spec_public @*/ int id;
 	
 	@Temporal(TemporalType.DATE)
-	private /*@ spec public @*/ Date dataCadastro;
+	private /*@ spec_public @*/ Date dataCadastro;
 	
-	private /*@ spec public @*/ String login;
-	private /*@ spec public @*/ String cpf;
-	private /*@ spec public @*/ String email;
-	private /*@ spec public @*/ String telefone;
-	private /*@ spec public @*/ String senha;
-	private /*@ spec public @*/ String nome;
-	private /*@ spec public @*/ String passaporte;
+	private /*@ spec_public @*/ String login;
+	private /*@ spec_public @*/ String cpf;
+	private /*@ spec_public @*/ String email;
+	private /*@ spec_public @*/ String telefone;
+	private /*@ spec_public @*/ String senha;
+	private /*@ spec_public @*/ String nome;
+	private /*@ spec_public @*/ String passaporte;
 
 	public Usuario() {
 	}
-	/*@ requires login != null && senha != null;
-	 *@ assignable this.login, this.senha;
-	 *@ ensures this.login == login && this.senha == senha;
-	 */
+	//@ requires login != null && senha != null;
+	//@ assignable this.login, this.senha;
+	//@ ensures this.login == login && this.senha == senha;
 	public Usuario(String login, String senha) {
 		this.login = login;
 		this.senha = senha;
@@ -41,46 +40,42 @@ public class Usuario {
 		return dataCadastro;
 	}
 	
-	/*@ requires dataCadastro != null
-	 *@ assignable this.dataCadastro
-	 *@ ensures this.dataCadastro == dataCadastro;
-	 */
+	//@ requires dataCadastro != null;
+	//@ assignable this.dataCadastro;
+	//@ ensures this.dataCadastro == dataCadastro;
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public int getId() {
+	public /*@ pure @*/ int  getId() {
 		return id;
 	}
 	
-	/*@ requires id != null;
-	 *@ assignable this.id;
-	 *@ ensures this.id == id;
-	 */
+	//@ requires id > 0;
+	//@ assignable this.id;
+	//@ ensures this.id == id;
 	public void setId(int id) {
 		this.id = id;
 	}
 	
-	public String getLogin() {
+	public /*@ pure @*/ String getLogin() {
 		return login;
 	}
 	
-	/*@ requires login != null;
-	 *@ assignable this.login;
-	 *@ ensure this.login == login 
-	 */
+	//@ requires login != null;
+	//@ assignable this.login;
+	//@ ensures this.login == login;
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
-	public String getSenha() {
+	public /*@ pure @*/ String getSenha() {
 		return senha;
 	}
 	
-	/*@ requires senha != null;
-	 *@ assignable this.senha;
-	 *@ ensures this.senha == senha;
-	 */
+	//@ requires senha != null;
+	//@ assignable this.senha;
+	//@ ensures this.senha == senha;
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
@@ -88,10 +83,9 @@ public class Usuario {
 	public String getNome() {
 		return nome;
 	}
-	/*@ requires nome != null;
-	 *@ assignable this.nome;
-	 *@ ensures this.nome == nome;
-	 */
+	//@ requires nome != null;
+	//@ assignable this.nome;
+	//@ ensures this.nome == nome;
 	public void setNome(String nome) {
 		nome=nome.toUpperCase();
 		this.nome = nome;
@@ -100,9 +94,9 @@ public class Usuario {
 	public String getCpf() {
 		return cpf;
 	}
-	/*@ requires cpf != null;
-	 *@ assignable this.cpf, this.login;
-	 *@ ensures this.cpf == cpf && this.login == cpf; */
+	//@ requires cpf != null;
+	//@ assignable this.cpf, this.login;
+	//@ ensures this.cpf == cpf && this.login == cpf;
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 		this.login = cpf;
@@ -111,10 +105,9 @@ public class Usuario {
 	public String getEmail() {
 		return email;
 	}
-	/*@ requires email != null;
-	 *@ assignable this.email;
-	 *@ ensures this.email == email;
-	 */
+	//@ requires email != null;
+	//@ assignable this.email;
+	//@ ensures this.email == email;
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -122,10 +115,9 @@ public class Usuario {
 	public String getTelefone() {
 		return telefone;
 	}
-	/*@ requires telefone != null;
-	 *@ assignable this.telefone;
-	 *@ ensures this.telefone == telefone;
-	 */
+	//@ requires telefone != null;
+	//@ assignable this.telefone;
+	//@ ensures this.telefone == telefone;
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
@@ -133,10 +125,9 @@ public class Usuario {
 	public String getPassaporte() {
 		return passaporte;
 	}
-	/*@ requires passaporte != null;
-	 *@ assignable this.passaporte;
-	 *@ ensures this.passaporte == passaporte;
-	 */
+	//@ requires passaporte != null;
+	//@ assignable this.passaporte;
+	//@ ensures this.passaporte == passaporte;
 	public void setPassaporte(String passaporte) {
 		this.passaporte = passaporte;
 	}

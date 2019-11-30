@@ -12,12 +12,11 @@ public class Funcionario extends Usuario{
 
 	
 	@Temporal(TemporalType.DATE)
-	private /*@ spec public @*/ Date dataAdmissao;
-	private /*@ spec public @*/ String funcao;
+	private /*@ spec_public @*/ Date dataAdmissao;
+	private /*@ spec_public @*/ String funcao;
 	
 	public Funcionario() {
 	}
-
 	public Funcionario(String login, String senha) {
 		super(login,senha);
 	}
@@ -26,17 +25,16 @@ public class Funcionario extends Usuario{
 		return dataAdmissao;
 	}
 	
-	/*@ requires dataAdmissao != null
-	 *@ assignable this.dataAdmissao
-	 *@ ensures this.dataAdmissao == dataAdmissao 
-	 */
+	//@ requires dataAdmissao != null;
+	//@ assignable this.dataAdmissao;
+	//@ ensures this.dataAdmissao == dataAdmissao;
 	public void setDataAdmissao(Date dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 	
-	/*@ requires dataAdmissao != null;
-	 *@ 
-	 */
+	//@ requires dataAdmissao != null;
+	//@ assignable this.dataAdmissao;
+	//@ ensures this.dataAdmissao == dataAdmissao;
 	public void setDataAdmissao(String dataAdmissao) throws ParseException {
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd"); 
 		Date data = formato.parse(dataAdmissao);
@@ -46,7 +44,9 @@ public class Funcionario extends Usuario{
 	public String getFuncao() {
 		return funcao;
 	}
-
+	//@ requires funcao != null;
+	//@ assignable this.funcao;
+	//@ ensures this.funcao == funcao;
 	public void setFuncao(String funcao) {
 		this.funcao = funcao;
 	}
