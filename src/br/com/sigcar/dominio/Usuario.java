@@ -29,7 +29,7 @@ public class Usuario {
 
 	public Usuario() {
 	}
-	/*@ requires login != "" && senha != null;
+	/*@ requires login != null && senha != null;
 	 @ assignable this.login, this.senha;
 	 @ ensures this.login == login && this.senha == senha;
 	 */
@@ -64,7 +64,7 @@ public class Usuario {
 		return login;
 	}
 	
-	//@ requires login != "";
+	//@ requires login != null;
 	//@ assignable this.login;
 	//@ ensures this.login == login;
 	public void setLogin(String login) {
@@ -93,7 +93,7 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getCpf() {
+	public /*@ pure */ String getCpf() {
 		return cpf;
 	}
 	//@ requires cpf != null;
@@ -104,7 +104,7 @@ public class Usuario {
 		this.login = cpf;
 	}
 
-	public String getEmail() {
+	public /*@ pure */ String getEmail() {
 		return email;
 	}
 	//@ requires email != null;
