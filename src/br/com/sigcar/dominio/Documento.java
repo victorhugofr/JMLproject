@@ -46,19 +46,18 @@ public class Documento {
 	private /*@ spec_public @*/ byte[] arquivoBase64Original;
 	
 	
-	public String getArquivoBase64() {
+	public /*@ pure @*/ String getArquivoBase64() {
 		return arquivoBase64;
 	}
 
 	//@ requires arquivoBase64 != null;
 	//@ assignable this.arquivoBase64;
 	//@ ensures this.arquivoBase64 == arquivoBase64;
-
 	public void setArquivoBase64(String arquivoBase64) {
 		this.arquivoBase64 = arquivoBase64;
 	}
 
-	public String getExtensao() {
+	public /*@ pure@*/ String getExtensao() {
 		return extensao;
 	}
 
@@ -79,7 +78,7 @@ public class Documento {
 		this.arquivoBase64Original = arquivoBase64Original;
 	}
 
-	public int getId() {
+	public /*@ pure @*/ int getId() {
 		return id;
 	}
 
@@ -91,7 +90,7 @@ public class Documento {
 	}
 
 
-	public String getObservacao() {
+	public /*@ pure@*/ String getObservacao() {
 		return observacao;
 	}
 	
@@ -102,7 +101,7 @@ public class Documento {
 		this.observacao = observacao;
 	}
 
-	public String getNome() {
+	public /*@ pure @*/ String getNome() {
 		return nome;
 	}
 
@@ -113,34 +112,33 @@ public class Documento {
 		this.nome = nome;
 	}
 
-	public StatusDocumento getStatus() {
+	public /*@ pure @*/ StatusDocumento getStatus() {
 		return status;
 	}
 
-	//@ requires status != null;
+	//@ requires status.label == "Corrigido" || status.label == "Com Falhas" || status.label == "Aguardando correcao";
 	//@ assignable this.status;
 	//@ ensures this.status == status;
 	public void setStatus(StatusDocumento status) {
 		this.status = status;
 	}
 
-	public List<Contestacao> getContestacao() {
+	public /*@ pure @*/ List<Contestacao> getContestacao() {
 		return contestacoes;
 	}
 
-	//@ requires contestacao != null;
+	//@ requires contestacao.size() > 0;
 	//@ assignable this.contestacoes;
 	//@ ensures this.contestacoes == contestacao; 
-
 	public void setContestacao(List<Contestacao> contestacao) {
 		this.contestacoes = contestacao;
 	}
 
-	public List<Correcao> getCorrecao() {
+	public /*@ pure @*/ List<Correcao> getCorrecao() {
 		return correcao;
 	}
 	
-	//@ requires correcao != null;
+	//@ requires correcao.size() > 0;
 	//@ assignable this.correcao;
 	//@ ensures this.correcao == correcao; 
 	public void setCorrecao(List<Correcao> correcao) {

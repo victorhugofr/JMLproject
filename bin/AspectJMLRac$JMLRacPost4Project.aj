@@ -127,7 +127,7 @@ public privileged aspect AspectJMLRac$JMLRacPost4Project {
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_Contestacao$3f682aed_63b6_415f_a7f5_68a01a6e4c0b{
+public static aspect UtilPreconditionChecking_Contestacao$1f1a7b52_c217_4234_baca_b0987e742c13{
   before(): (execution( * br.com.sigcar.dominio.Contestacao..*+.*(..))
           || execution(br.com.sigcar.dominio.Contestacao..*+.new(..))
           || execution( * br.com.sigcar.dominio.Contestacao+.*(..))
@@ -154,7 +154,7 @@ public static aspect UtilPreconditionChecking_Contestacao$3f682aed_63b6_415f_a7f
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_Correcao$5b2a972b_74b7_481a_9f81_28e04d0f4151{
+public static aspect UtilPreconditionChecking_Correcao$052e53b5_3cf2_4dc7_8eb4_54b880232bc7{
   before(): (execution( * br.com.sigcar.dominio.Correcao..*+.*(..))
           || execution(br.com.sigcar.dominio.Correcao..*+.new(..))
           || execution( * br.com.sigcar.dominio.Correcao+.*(..))
@@ -181,7 +181,7 @@ public static aspect UtilPreconditionChecking_Correcao$5b2a972b_74b7_481a_9f81_2
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_Documento$4ac82a83_b26e_45a0_ba9f_b088f8b84c6e{
+public static aspect UtilPreconditionChecking_Documento$65e5a50f_d6d8_462c_9623_86693faf8e60{
   before(): (execution( * br.com.sigcar.dominio.Documento..*+.*(..))
           || execution(br.com.sigcar.dominio.Documento..*+.new(..))
           || execution( * br.com.sigcar.dominio.Documento+.*(..))
@@ -208,7 +208,7 @@ public static aspect UtilPreconditionChecking_Documento$4ac82a83_b26e_45a0_ba9f_
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_Endereco$38b5e459_8743_4334_b6e3_4898d9dd2c6a{
+public static aspect UtilPreconditionChecking_Endereco$45d4adb3_ac8c_4a43_8a62_2536e9205d81{
   before(): (execution( * br.com.sigcar.dominio.Endereco..*+.*(..))
           || execution(br.com.sigcar.dominio.Endereco..*+.new(..))
           || execution( * br.com.sigcar.dominio.Endereco+.*(..))
@@ -250,7 +250,7 @@ execution(* br.com.sigcar.dominio.Funcionario+.*(..) throws java.text.ParseExcep
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_Funcionario$a9a5e3fe_cc6c_4939_9f45_518d29dcbe56{
+public static aspect UtilPreconditionChecking_Funcionario$d7428091_8f0e_4a01_b717_f8aefffc9550{
   before(): (execution( * br.com.sigcar.dominio.Funcionario..*+.*(..))
           || execution(br.com.sigcar.dominio.Funcionario..*+.new(..))
           || execution( * br.com.sigcar.dominio.Funcionario+.*(..))
@@ -277,7 +277,7 @@ public static aspect UtilPreconditionChecking_Funcionario$a9a5e3fe_cc6c_4939_9f4
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_Servico$770f7821_5cbb_4209_b1c3_2d891b76401b{
+public static aspect UtilPreconditionChecking_Servico$e8f0b7f6_624d_411f_b9ef_8f1224730a77{
   before(): (execution( * br.com.sigcar.dominio.Servico..*+.*(..))
           || execution(br.com.sigcar.dominio.Servico..*+.new(..))
           || execution( * br.com.sigcar.dominio.Servico+.*(..))
@@ -304,7 +304,7 @@ public static aspect UtilPreconditionChecking_Servico$770f7821_5cbb_4209_b1c3_2d
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_Usuario$17a0dce1_878d_4933_aa34_142284dbfdac{
+public static aspect UtilPreconditionChecking_Usuario$d0111d82_df0d_449b_aa82_014fd8247272{
   before(): (execution( * br.com.sigcar.dominio.Usuario..*+.*(..))
           || execution(br.com.sigcar.dominio.Usuario..*+.new(..))
           || execution( * br.com.sigcar.dominio.Usuario+.*(..))
@@ -400,7 +400,7 @@ execution(* br.com.sigcar.execucao.MainFile+.*(..) throws br.com.sigcar.execucao
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_MainFile$e1d92d98_41ca_4579_ba23_f7d6ad9e3b21{
+public static aspect UtilPreconditionChecking_MainFile$f4d780c6_48de_4206_9187_3a211a59e099{
   before(): (execution( * br.com.sigcar.execucao.MainFile..*+.*(..))
           || execution(br.com.sigcar.execucao.MainFile..*+.new(..))
           || execution( * br.com.sigcar.execucao.MainFile+.*(..))
@@ -487,7 +487,7 @@ execution(* br.com.sigcar.negocio.ContestacaoService+.*(..) throws br.com.sigcar
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_ContestacaoService$1678eca6_a676_429a_8903_0e300383f93b{
+public static aspect UtilPreconditionChecking_ContestacaoService$dbfe053a_1c87_4836_8ceb_700aeeb8ed82{
   before(): (execution( * br.com.sigcar.negocio.ContestacaoService..*+.*(..))
           || execution(br.com.sigcar.negocio.ContestacaoService..*+.new(..))
           || execution( * br.com.sigcar.negocio.ContestacaoService+.*(..))
@@ -529,7 +529,7 @@ execution(* br.com.sigcar.negocio.DocumentoService+.*(..) throws br.com.sigcar.e
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_DocumentoService$893d6fd6_ecab_4c8b_a63b_24683253faad{
+public static aspect UtilPreconditionChecking_DocumentoService$7d51a8b8_1523_4544_a700_08fb975146f9{
   before(): (execution( * br.com.sigcar.negocio.DocumentoService..*+.*(..))
           || execution(br.com.sigcar.negocio.DocumentoService..*+.new(..))
           || execution( * br.com.sigcar.negocio.DocumentoService+.*(..))
@@ -571,7 +571,7 @@ execution(* br.com.sigcar.negocio.FuncionarioService+.*(..) throws br.com.sigcar
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_FuncionarioService$f58fa8a9_2bb1_468a_8cb0_dee9ee7dfa6c{
+public static aspect UtilPreconditionChecking_FuncionarioService$c7031c61_6fea_4dde_a43a_dac4d39c0b22{
   before(): (execution( * br.com.sigcar.negocio.FuncionarioService..*+.*(..))
           || execution(br.com.sigcar.negocio.FuncionarioService..*+.new(..))
           || execution( * br.com.sigcar.negocio.FuncionarioService+.*(..))
@@ -613,7 +613,7 @@ execution(* br.com.sigcar.negocio.ServicoService+.*(..) throws br.com.sigcar.exc
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_ServicoService$167b9981_6041_4b4b_b472_3a7e7a7752de{
+public static aspect UtilPreconditionChecking_ServicoService$9aee6128_42e2_4fcf_a5f8_9b570c467f3f{
   before(): (execution( * br.com.sigcar.negocio.ServicoService..*+.*(..))
           || execution(br.com.sigcar.negocio.ServicoService..*+.new(..))
           || execution( * br.com.sigcar.negocio.ServicoService+.*(..))
@@ -673,7 +673,7 @@ execution(* br.com.sigcar.negocio.UsuarioService+.*(..) throws br.com.sigcar.exc
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_ContestacaoRepositorio$5b70babf_c432_4b06_814c_ecd5777f31b5{
+public static aspect UtilPreconditionChecking_ContestacaoRepositorio$9b040ec3_ee73_4e2d_83b5_92d38b3991c0{
   before(): (execution( * br.com.sigcar.repositorios.ContestacaoRepositorio..*+.*(..))
           || execution(br.com.sigcar.repositorios.ContestacaoRepositorio..*+.new(..))
           || execution( * br.com.sigcar.repositorios.ContestacaoRepositorio+.*(..))
@@ -700,7 +700,7 @@ public static aspect UtilPreconditionChecking_ContestacaoRepositorio$5b70babf_c4
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_DocumentoRepositorio$eaab0344_d986_4723_b128_66a7290a62fb{
+public static aspect UtilPreconditionChecking_DocumentoRepositorio$7c60466b_0f62_459d_be5a_84efab0d0c94{
   before(): (execution( * br.com.sigcar.repositorios.DocumentoRepositorio..*+.*(..))
           || execution(br.com.sigcar.repositorios.DocumentoRepositorio..*+.new(..))
           || execution( * br.com.sigcar.repositorios.DocumentoRepositorio+.*(..))
@@ -727,7 +727,7 @@ public static aspect UtilPreconditionChecking_DocumentoRepositorio$eaab0344_d986
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_FuncionarioRepositorio$913a3c91_ffe5_40f9_a2fc_371fedf36138{
+public static aspect UtilPreconditionChecking_FuncionarioRepositorio$23ad6680_e6a7_498f_87f5_012435c1eb86{
   before(): (execution( * br.com.sigcar.repositorios.FuncionarioRepositorio..*+.*(..))
           || execution(br.com.sigcar.repositorios.FuncionarioRepositorio..*+.new(..))
           || execution( * br.com.sigcar.repositorios.FuncionarioRepositorio+.*(..))
@@ -754,7 +754,7 @@ public static aspect UtilPreconditionChecking_FuncionarioRepositorio$913a3c91_ff
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_ServicoRepositorio$ce57b9a3_2ea1_41a0_b740_4ad034cb86df{
+public static aspect UtilPreconditionChecking_ServicoRepositorio$848883cd_2526_41aa_95b4_edd18eed3a2d{
   before(): (execution( * br.com.sigcar.repositorios.ServicoRepositorio..*+.*(..))
           || execution(br.com.sigcar.repositorios.ServicoRepositorio..*+.new(..))
           || execution( * br.com.sigcar.repositorios.ServicoRepositorio+.*(..))
@@ -781,7 +781,7 @@ public static aspect UtilPreconditionChecking_ServicoRepositorio$ce57b9a3_2ea1_4
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_UsuarioRepositorio$a975bf07_8de9_4e54_8923_78a714aa4e68{
+public static aspect UtilPreconditionChecking_UsuarioRepositorio$fc4c642b_07da_4c77_8f80_408cc9ea5cd0{
   before(): (execution( * br.com.sigcar.repositorios.UsuarioRepositorio..*+.*(..))
           || execution(br.com.sigcar.repositorios.UsuarioRepositorio..*+.new(..))
           || execution( * br.com.sigcar.repositorios.UsuarioRepositorio+.*(..))
@@ -808,7 +808,7 @@ public static aspect UtilPreconditionChecking_UsuarioRepositorio$a975bf07_8de9_4
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }
 
-public static aspect UtilPreconditionChecking_ZonaService$a1be1c69_f234_4963_b682_30686fd5e68d{
+public static aspect UtilPreconditionChecking_ZonaService$351870d9_5a42_4b37_b374_f611d4fd3472{
   before(): (execution( * br.com.sigcar.services.ZonaService..*+.*(..))
           || execution(br.com.sigcar.services.ZonaService..*+.new(..))
           || execution( * br.com.sigcar.services.ZonaService+.*(..))
@@ -831,6 +831,42 @@ public static aspect UtilPreconditionChecking_ZonaService$a1be1c69_f234_4963_b68
           || execution(br.com.sigcar.util.HibernateUtil..*+.new(..))
           || execution( * br.com.sigcar.util.HibernateUtil+.*(..))
           || execution(br.com.sigcar.util.HibernateUtil+.new(..))){
+    JMLChecker.hideAjmlSpecificStackTrace(rac$e);
+    JMLChecker.rethrowJMLAssertionError(rac$e);
+  }
+
+/** Generated by AspectJML to enable modular signals_only checking (XCS enabled) */
+  after(final tests1.TestDocumento object$rac): (execution( * tests1.TestDocumento..*+.*(..))
+          || execution(tests1.TestDocumento..*+.new(..))
+          || execution( * tests1.TestDocumento+.*(..))
+          || execution(tests1.TestDocumento+.new(..))) && 
+   this(object$rac) {
+   JMLChecker.hasAnyThrownExceptionalPostconditionSignalsOnly();
+  }
+
+/** Generated by AspectJML to enhance error reporting (Execution Site enabled) */
+  after() throwing (Throwable rac$e): (execution( * tests1.TestDocumento..*+.*(..))
+          || execution(tests1.TestDocumento..*+.new(..))
+          || execution( * tests1.TestDocumento+.*(..))
+          || execution(tests1.TestDocumento+.new(..))){
+    JMLChecker.hideAjmlSpecificStackTrace(rac$e);
+    JMLChecker.rethrowJMLAssertionError(rac$e);
+  }
+
+/** Generated by AspectJML to enable modular signals_only checking (XCS enabled) */
+  after(final tests1.TestEndereco object$rac): (execution( * tests1.TestEndereco..*+.*(..))
+          || execution(tests1.TestEndereco..*+.new(..))
+          || execution( * tests1.TestEndereco+.*(..))
+          || execution(tests1.TestEndereco+.new(..))) && 
+   this(object$rac) {
+   JMLChecker.hasAnyThrownExceptionalPostconditionSignalsOnly();
+  }
+
+/** Generated by AspectJML to enhance error reporting (Execution Site enabled) */
+  after() throwing (Throwable rac$e): (execution( * tests1.TestEndereco..*+.*(..))
+          || execution(tests1.TestEndereco..*+.new(..))
+          || execution( * tests1.TestEndereco+.*(..))
+          || execution(tests1.TestEndereco+.new(..))){
     JMLChecker.hideAjmlSpecificStackTrace(rac$e);
     JMLChecker.rethrowJMLAssertionError(rac$e);
   }

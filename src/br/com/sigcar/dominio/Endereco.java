@@ -11,7 +11,7 @@ public class Endereco {
 	private /*@ spec_public @*/ String ibge;
 	private /*@ spec_public @*/ String gia;
 	
-	public String getCep() {
+	public /*@ pure @*/ String getCep() {
 		return cep;
 	}
 	//@ requires cep != null;
@@ -21,7 +21,7 @@ public class Endereco {
 		this.cep = cep;
 	}
 	
-	public String getLogradouro() {
+	public /*@ pure @*/ String getLogradouro() {
 		return logradouro;
 	}
 	//@ requires logradouro != null;
@@ -30,7 +30,7 @@ public class Endereco {
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
-	public String getComplemento() {
+	public /*@ pure @*/ String getComplemento() {
 		return complemento;
 	}
 	//@ requires complemento != null;
@@ -39,7 +39,7 @@ public class Endereco {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	public String getBairro() {
+	public /*@ pure @*/ String getBairro() {
 		return bairro;
 	}
 	//@ requires bairro != null;
@@ -48,7 +48,7 @@ public class Endereco {
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
-	public String getLocalidade() {
+	public /*@ pure @*/String getLocalidade() {
 		return localidade;
 	}
 	//@ requires localidade != null;
@@ -57,7 +57,7 @@ public class Endereco {
 	public void setLocalidade(String localidade) {
 		this.localidade = localidade;
 	}
-	public String getUf() {
+	public /*@ pure @*/ String getUf() {
 		return uf;
 	}
 	
@@ -67,7 +67,7 @@ public class Endereco {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	public String getUnidade() {
+	public /*@ pure @*/ String getUnidade() {
 		return unidade;
 	}
 	
@@ -77,7 +77,7 @@ public class Endereco {
 	public void setUnidade(String unidade) {
 		this.unidade = unidade;
 	}
-	public String getIbge() {
+	public /*@ pure @*/ String getIbge() {
 		return ibge;
 	}
 	
@@ -87,7 +87,7 @@ public class Endereco {
 	public void setIbge(String ibge) {
 		this.ibge = ibge;
 	}
-	public String getGia() {
+	public /*@ pure @*/ String getGia() {
 		return gia;
 	}
 	

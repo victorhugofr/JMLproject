@@ -87,8 +87,6 @@ public class TestUsuario {
 		System.out.println(usuario.getPassaporte());
 		*/
 		
-		
-		
 		System.out.println("--Fim da Execução--");
 	}
 

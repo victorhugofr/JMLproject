@@ -6,7 +6,7 @@ public enum StatusDocumento {
 	COM_FALHAS("Com falhas"),
 	AGUARDANDO_CORRECAO("Aguardando correcao");
 
-	private String label;
+	private /*@ spec_public @*/String label;
 
 	StatusDocumento(String label){
 		this.label=label;
