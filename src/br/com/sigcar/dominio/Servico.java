@@ -45,7 +45,7 @@ public class Servico {
 		
 	}
 	
-	public int getId() {
+	public /*@ pure @*/ int getId() {
 		return id;
 	}
 	
@@ -56,11 +56,11 @@ public class Servico {
 		this.id = id;
 	}
 
-	public boolean isStatus() {
+	public /*@ pure @*/ boolean isStatus() {
 		return status;
 	}
 
-	public boolean isAtivo() {
+	public /*@ pure @*/ boolean isAtivo() {
 		return status;
 	}
 	
@@ -71,7 +71,7 @@ public class Servico {
 		this.status = status;
 	}
 
-	public Date getDataSolicitacao() {
+	public /*@ pure @*/ Date getDataSolicitacao() {
 		return dataSolicitacao;
 	}
 	//@ requires dataSolicitacao != null;
@@ -82,18 +82,18 @@ public class Servico {
 	}
 
 
-	public String getNomeEntidade() {
+	public /*@ pure @*/ String getNomeEntidade() {
 		return nomeEntidade;
 	}
 
-	//@ requires nomeEntidade != null;
+	//@ requires nomeEntidade != null || nomeEntidade == "";
 	//@ assignable this.nomeEntidade;
 	//@ ensures this.nomeEntidade == nomeEntidade;
 	public void setNomeEntidade(String nomeEntidade) {
 		this.nomeEntidade = nomeEntidade;
 	}
 
-	public Usuario getUsuario() {
+	public /*@ pure @*/ Usuario getUsuario() {
 		return usuario;
 	}
 
@@ -104,22 +104,22 @@ public class Servico {
 		this.usuario = usuario;
 	}
 
-	public List<Documento> getDocumentos() {
+	public /*@ pure @*/ List<Documento> getDocumentos() {
 		return documentos;
 	}
 	
-	//@ requires documentos != null;
+	//@ requires documentos.size() > 0;
 	//@ assignable this.documentos;
 	//@ ensures this.documentos == documentos;
 	public void setDocumentos(List<Documento> documentos) {
 		this.documentos = documentos;
 	}
 
-	public TipoServico getTipoServico() {
+	public /*@ pure @*/ TipoServico getTipoServico() {
 		return tipoServico;
 	}
 	
-	//@ requires tipoServico != null;
+	//@ requires tipoServico.label == "Registrar"|| tipoServico.label == "Atualizar";
 	//@ assignable this.tipoServico;
 	//@ ensures this.tipoServico == tipoServico;
 	public void setTipoServico(TipoServico tipoServico) {

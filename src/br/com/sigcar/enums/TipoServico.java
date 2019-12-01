@@ -5,7 +5,7 @@ public enum TipoServico {
 	REGISTRAR("Registrar"),
 	ATUALIZAR("Atualizar");
 
-	private String label;
+	private /*@ spec_public @*/ String label;
 
 	TipoServico(String label){
 		this.label=label;
