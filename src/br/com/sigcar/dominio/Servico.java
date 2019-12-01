@@ -23,84 +23,105 @@ public class Servico {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private /*@ spec_public @*/int id;
 	
-	private boolean status;
+	private /*@ spec_public @*/ boolean status;
 	
 	@Temporal(TemporalType.DATE)
-	private Date dataSolicitacao;
+	private /*@ spec_public @*/ Date dataSolicitacao;
 	
-	private String nomeEntidade;
+	private /*@ spec_public @*/ String nomeEntidade;
 	
 	@ManyToOne
-	private Usuario usuario;
+	private /*@ spec_public @*/ Usuario usuario;
 	
 	@Enumerated(EnumType.STRING)
-	private TipoServico tipoServico;
+	private /*@ spec_public @*/ TipoServico tipoServico;
 	
 	@OneToMany
-	private List<Documento> documentos;
+	private /*@ spec_public @*/ List<Documento> documentos;
 
 	public Servico() {
 		
 	}
 	
-	public int getId() {
+	public /*@ pure @*/ int getId() {
 		return id;
 	}
-
+	
+	//@ requires id > 0;
+	//@ assignable this.id; 
+	//@ ensures this.id == id;
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public boolean isStatus() {
+	public /*@ pure @*/ boolean isStatus() {
 		return status;
 	}
 
-	public boolean isAtivo() {
+	public /*@ pure @*/ boolean isAtivo() {
 		return status;
 	}
 	
+	
+	//@ assignable this.status;
+	//@ ensures this.status == status;
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
-	public Date getDataSolicitacao() {
+	public /*@ pure @*/ Date getDataSolicitacao() {
 		return dataSolicitacao;
 	}
-
+	//@ requires dataSolicitacao != null;
+	//@ assignable this.dataSolicitacao;
+	//@ ensures this.dataSolicitacao == dataSolicitacao; 
 	public void setDataSolicitacao(Date dataSolicitacao) {
 		this.dataSolicitacao = dataSolicitacao;
 	}
 
 
-	public String getNomeEntidade() {
+	public /*@ pure @*/ String getNomeEntidade() {
 		return nomeEntidade;
 	}
 
+	//@ requires nomeEntidade != null || nomeEntidade == "";
+	//@ assignable this.nomeEntidade;
+	//@ ensures this.nomeEntidade == nomeEntidade;
 	public void setNomeEntidade(String nomeEntidade) {
 		this.nomeEntidade = nomeEntidade;
 	}
 
-	public Usuario getUsuario() {
+	public /*@ pure @*/ Usuario getUsuario() {
 		return usuario;
 	}
 
+	//@ requires usuario != null;
+	//@ assignable this.usuario;
+	//@ ensures this.usuario == usuario;
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public List<Documento> getDocumentos() {
+	public /*@ pure @*/ List<Documento> getDocumentos() {
 		return documentos;
 	}
-
+	
+	//@ requires documentos.size() > 0;
+	//@ assignable this.documentos;
+	//@ ensures this.documentos == documentos;
 	public void setDocumentos(List<Documento> documentos) {
 		this.documentos = documentos;
 	}
 
-	public TipoServico getTipoServico() {
+	public /*@ pure @*/ TipoServico getTipoServico() {
 		return tipoServico;
 	}
+	
+	//@ requires tipoServico.label == "Registrar"|| tipoServico.label == "Atualizar";
+	//@ assignable this.tipoServico;
+	//@ ensures this.tipoServico == tipoServico;
 	public void setTipoServico(TipoServico tipoServico) {
 		this.tipoServico = tipoServico;
 	}

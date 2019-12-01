@@ -21,43 +21,49 @@ public class Documento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private /*@ spec_public @*/ int id;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusDocumento status;
+	private /*@ spec_public @*/ StatusDocumento status;
 	
-	private String observacao;
-	
-	@OneToMany
-	private List<Contestacao> contestacoes;
+	private /*@ spec_public @*/ String observacao;
 	
 	@OneToMany
-	private List<Correcao> correcao;
+	private /*@ spec_public @*/ List<Contestacao> contestacoes;
 	
-	private String nome;
+	@OneToMany
+	private /*@ spec_public @*/ List<Correcao> correcao;
+	
+	private /*@ spec_public @*/ String nome;
 
 	@Column(columnDefinition="text")
-	private String arquivoBase64;
+	private /*@ spec_public @*/ String arquivoBase64;
 	
-	private String extensao; //pdf,docx
+	private /*@ spec_public @*/ String extensao; //pdf,docx
 	
 	@Lob
 	@Basic(fetch=FetchType.LAZY)
-	private byte[] arquivoBase64Original;
+	private /*@ spec_public @*/ byte[] arquivoBase64Original;
 	
 	
-	public String getArquivoBase64() {
+	public /*@ pure @*/ String getArquivoBase64() {
 		return arquivoBase64;
 	}
 
+	//@ requires arquivoBase64 != null;
+	//@ assignable this.arquivoBase64;
+	//@ ensures this.arquivoBase64 == arquivoBase64;
 	public void setArquivoBase64(String arquivoBase64) {
 		this.arquivoBase64 = arquivoBase64;
 	}
 
-	public String getExtensao() {
+	public /*@ pure@*/ String getExtensao() {
 		return extensao;
 	}
 
+	//@ requires extensao != null;
+	//@ assignable this.extensao;
+	//@ ensures this.extensao == extensao;
 	public void setExtensao(String extensao) {
 		this.extensao = extensao;
 	}
@@ -65,56 +71,76 @@ public class Documento {
 	public byte[] getArquivoBase64Original() {
 		return arquivoBase64Original;
 	}
-
+	//@ requires arquivoBase64Original != null;
+	//@ assignable this.arquivoBase64Original;
+	//@ensures this.arquivoBase64Original == arquivoBase64Original;
 	public void setArquivoBase64Original(byte[] arquivoBase64Original) {
 		this.arquivoBase64Original = arquivoBase64Original;
 	}
 
-	public int getId() {
+	public /*@ pure @*/ int getId() {
 		return id;
 	}
 
+	//@ requires id > 0;
+	//@ assignable this.id;
+	//@ ensures this.id == id; 
 	public void setId(int id) {
 		this.id = id;
 	}
 
 
-	public String getObservacao() {
+	public /*@ pure@*/ String getObservacao() {
 		return observacao;
 	}
-
+	
+	//@ requires observacao != "";
+	//@ assignable this.observacao;
+	//@ ensures this.observacao == observacao;
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
 
-	public String getNome() {
+	public /*@ pure @*/ String getNome() {
 		return nome;
 	}
 
+	//@ requires nome != null || nome != "";
+	//@ assignable this.nome;
+	//@ ensures this.nome == nome;
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public StatusDocumento getStatus() {
+	public /*@ pure @*/ StatusDocumento getStatus() {
 		return status;
 	}
 
+	//@ requires status.label == "Corrigido" || status.label == "Com Falhas" || status.label == "Aguardando correcao";
+	//@ assignable this.status;
+	//@ ensures this.status == status;
 	public void setStatus(StatusDocumento status) {
 		this.status = status;
 	}
 
-	public List<Contestacao> getContestacao() {
+	public /*@ pure @*/ List<Contestacao> getContestacao() {
 		return contestacoes;
 	}
 
+	//@ requires contestacao.size() > 0;
+	//@ assignable this.contestacoes;
+	//@ ensures this.contestacoes == contestacao; 
 	public void setContestacao(List<Contestacao> contestacao) {
 		this.contestacoes = contestacao;
 	}
 
-	public List<Correcao> getCorrecao() {
+	public /*@ pure @*/ List<Correcao> getCorrecao() {
 		return correcao;
 	}
-
+	
+	//@ requires correcao.size() > 0;
+	//@ assignable this.correcao;
+	//@ ensures this.correcao == correcao; 
 	public void setCorrecao(List<Correcao> correcao) {
 		this.correcao = correcao;
 	}
