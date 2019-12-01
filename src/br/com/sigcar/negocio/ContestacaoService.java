@@ -20,6 +20,8 @@ public class ContestacaoService {
 	}
 	/*@ 
 	  @ requires contestacaoRepositorio2 != null;
+	  @ assignable this.contestacaoRepositorio;
+	  @ ensures this.contestacaoRepositorio == contestacaoRepositorio2;
 	  @*/
 	public ContestacaoService(ContestacaoRepositorio contestacaoRepositorio2) {
 		this.contestacaoRepositorio = contestacaoRepositorio2;
