@@ -94,7 +94,7 @@ public class Documento {
 		return observacao;
 	}
 	
-	//@ requires observacao != null;
+	//@ requires observacao != "";
 	//@ assignable this.observacao;
 	//@ ensures this.observacao == observacao;
 	public void setObservacao(String observacao) {
@@ -105,7 +105,7 @@ public class Documento {
 		return nome;
 	}
 
-	//@ requires nome != null;
+	//@ requires nome != null || nome != "";
 	//@ assignable this.nome;
 	//@ ensures this.nome == nome;
 	public void setNome(String nome) {

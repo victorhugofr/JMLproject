@@ -38,6 +38,15 @@ public class TestDocumento {
 		*/
 		
 		/*
+		//Testando setId()
+		//int id= "5";
+		//int id = 0;
+		int id = -1;
+		Documento documento = new Documento();
+		documento.setId(id);
+		*/
+		
+		/*
 		//Testando setStatus()
 		//StatusDocumento statusDoc = StatusDocumento.CORRIGIDO;
 		StatusDocumento statusDoc = null;
@@ -52,12 +61,18 @@ public class TestDocumento {
 		documento.setContestacao(contestacao);
 		*/
 		
+		/*
 		//Testando setCorrecao()
 		List<Correcao> correcao = new ArrayList<Correcao>();
 		Documento documento = new Documento();
 		documento.setCorrecao(correcao);
+		*/
 		
-		
+		//Testando setObservacao()
+		//String observacao = "Observacao";
+		String observacao = "";
+		Documento documento = new Documento();
+		documento.setObservacao(observacao);
 		System.out.println("--Fim da Execução--");
 	}
 
