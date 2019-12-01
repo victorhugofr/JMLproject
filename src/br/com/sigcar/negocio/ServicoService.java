@@ -29,6 +29,8 @@ public class ServicoService {
 	/*@ 
 	  @ requires documentoRepositorio2 != null;
 	  @ requires servicoRepositorio2 != null;
+	  @ assignable this.documentoRepositorio, this.servicoRepositorio;
+	  @ ensures this.documentoRepositorio == documentoRepositorio2 && this.servicoRepositorio == servicoRepositorio2;
 	  @*/
 	public ServicoService(DocumentoRepositorio documentoRepositorio2, ServicoRepositorio servicoRepositorio2) {
 		this.documentoRepositorio=documentoRepositorio2;
