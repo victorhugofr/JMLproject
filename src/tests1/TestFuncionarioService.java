@@ -6,37 +6,54 @@ import br.com.sigcar.negocio.FuncionarioService;
 import br.com.sigcar.repositorios.FuncionarioRepositorio;
 
 public class TestFuncionarioService {
+
 	public static void main(String[] args) throws NegocioException {
-			
-			FuncionarioRepositorio funcionarioRepositorio = new FuncionarioRepositorio();
-	
-			int id = 1;
-			Funcionario funcionario= new Funcionario();
-			funcionario.setId(id);
-			funcionario.setLogin("login");
-			funcionario.setSenha("senha");
-	
-			FuncionarioService funcionarioService =  new FuncionarioService(funcionarioRepositorio);
-	//		//fluxo feliz
-	//		funcionarioService.adicionar(funcionario);
-			
-			//fluxo exceptional adicionar
-//			funcionarioService.adicionar(funcionario);
-//			funcionarioService.adicionar(funcionario);
-			
-			//fluxo exceptional remover
-//			funcionarioService.remover(funcionario);
-			
-			//fluxo feliz logar
-//			funcionarioService.adicionar(funcionario);
-//			funcionarioService.logar(funcionario);
-			
-			//fluxo exceptional logar
-			funcionarioService.adicionar(funcionario);
-			funcionario.setSenha("outra senha");
-			funcionarioService.logar(null);
-			
-			
-			System.out.println("--Fim da Execução--");
-		}
+		/*
+		//Testando Construtor
+		//FuncionarioRepositorio funcionarioRepositorio = new FuncionarioRepositorio();
+		FuncionarioRepositorio funcionarioRepositorio = null;
+		FuncionarioService funcionarioService = new FuncionarioService(funcionarioRepositorio);
+		*/
+		
+		/*
+		//Testando adicionar
+		FuncionarioRepositorio funcionarioRepositorio = new FuncionarioRepositorio();
+		FuncionarioService funcionarioService = new FuncionarioService(funcionarioRepositorio);
+		Funcionario funcionario = null;
+		//Funcionario funcionario = new Funcionario();
+		//funcionario.setId(5);
+		//funcionario.setNome("NOMe");
+		funcionarioService.adicionar(funcionario);
+		//funcionarioService.adicionar(funcionario);
+		*/
+		
+		/*
+		//Testando remover
+		FuncionarioRepositorio funcionarioRepositorio = new FuncionarioRepositorio();
+		FuncionarioService funcionarioService = new FuncionarioService(funcionarioRepositorio);
+		Funcionario funcionarioN = null;
+		Funcionario funcionario = new Funcionario();
+		funcionario.setId(5);
+		funcionario.setNome("NOMe");
+		funcionarioService.adicionar(funcionario);
+		funcionarioService.remover(funcionario);
+		funcionarioService.remover(funcionario);
+		*/
+		
+		//Testando Logar
+		FuncionarioRepositorio funcionarioRepositorio = new FuncionarioRepositorio();
+		FuncionarioService funcionarioService = new FuncionarioService(funcionarioRepositorio);
+		Funcionario funcionario = new Funcionario();
+		funcionario.setId(5);
+		funcionario.setNome("NOMe");
+		funcionario.setLogin("Login");
+		funcionario.setSenha("Senha");
+		Funcionario funcionario2 = null;
+		funcionarioService.adicionar(funcionario);
+		funcionarioService.logar(funcionario2);
+		
+		
+		System.out.println("--Fim da ExecuÃ§Ã£o--");
+	}
+
 }

@@ -1,5 +1,6 @@
 package tests1;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import br.com.sigcar.dominio.Documento;
 import br.com.sigcar.dominio.Servico;
 import br.com.sigcar.exceptions.NegocioException;
 import br.com.sigcar.negocio.DocumentoService;
+
+
 import br.com.sigcar.negocio.ServicoService;
 import br.com.sigcar.repositorios.DocumentoRepositorio;
 import br.com.sigcar.repositorios.ServicoRepositorio;
@@ -36,8 +39,5 @@ public class TestServicoService {
 		//fluxo exceptional
 //		servicoService.adicionar(servico,documentos);
 //		servicoService.adicionar(servico,documentos);
-		
-		
-		System.out.println("--Fim da Execução--");
-	}
+
 }

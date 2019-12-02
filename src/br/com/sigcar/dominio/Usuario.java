@@ -87,7 +87,7 @@ public class Usuario {
 	}
 	//@ requires nome != null;
 	//@ assignable this.nome;
-	//@ ensures this.nome == nome;
+	//@ ensures this.nome.equals(nome.toUpperCase());
 	public void setNome(String nome) {
 		nome=nome.toUpperCase();
 		this.nome = nome;

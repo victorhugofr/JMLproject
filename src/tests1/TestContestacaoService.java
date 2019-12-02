@@ -9,6 +9,7 @@ public class TestContestacaoService {
 
 	public static void main(String[] args) throws NegocioException {
 		
+
 		ContestacaoRepositorio contestacaoRepositorio = new ContestacaoRepositorio();
 
 		int id = 1;
@@ -22,8 +23,28 @@ public class TestContestacaoService {
 		//fluxo exceptional
 		contestacaoService.adicionar(contestacao);
 		contestacaoService.adicionar(contestacao);
+=======
+		/*
+		//Testando o construtor
+		//Contestacao contestacao = null;
+		//ContestacaoRepositorio contestacaoRepositorio = new ContestacaoRepositorio();
+		ContestacaoRepositorio contestacaoRepositorio = null;
+		ContestacaoService contestacaoService = new ContestacaoService(contestacaoRepositorio);
+		*/
+		
+		//Testando Adicionar
+		ContestacaoRepositorio contestacaoRepositorio = new ContestacaoRepositorio();
+		ContestacaoService contestacaoService = new ContestacaoService(contestacaoRepositorio);
+		//Contestacao contestacao = new Contestacao();
+		//contestacao.setId(1);
+		//contestacao.setTexto("Texto");
+		Contestacao contestacao = null;
+		contestacaoService.adicionar(contestacao);
+		//contestacaoService.adicionar(contestacao);
+		
+
 		
 		
-		System.out.println("--Fim da Execução--");
+		System.out.println("--Fim da ExecuÃ§Ã£o--");
 	}
 }

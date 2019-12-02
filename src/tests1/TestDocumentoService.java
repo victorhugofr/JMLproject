@@ -7,6 +7,7 @@ import br.com.sigcar.repositorios.DocumentoRepositorio;
 
 public class TestDocumentoService {
 
+
 public static void main(String[] args) throws NegocioException {
 		
 		DocumentoRepositorio documentoRepositorio = new DocumentoRepositorio();
@@ -23,6 +24,7 @@ public static void main(String[] args) throws NegocioException {
 		documentoService.adicionar(documento);
 		documentoService.adicionar(documento);
 		
-		System.out.println("--Fim da Execução--");
+		System.out.println("--Fim da ExecuÃ§Ã£o--");
 	}
+
 }
