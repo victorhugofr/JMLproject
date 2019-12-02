@@ -23,6 +23,8 @@ public class FuncionarioService {
 	
 	/*@ 
 	  @ requires funcionarioRepositorio2 != null;
+	  @ assignable this.funcionarioRepositorio;
+	  @ ensures this.funcionarioRepositorio == funcionarioRepositorio2;
 	  @*/
 	public FuncionarioService(FuncionarioRepositorio funcionarioRepositorio2) {
 		this.funcionarioRepositorio=funcionarioRepositorio2;
@@ -66,7 +68,7 @@ public class FuncionarioService {
 	/*@ 
 	  @ requires funcionarioRepositorio != null;
 	  @*/
-	public List<Funcionario> listar() {
+	public /*@ pure @*/ List<Funcionario> listar() {
 		return funcionarioRepositorio.listarFuncionarios();
 	}
 	

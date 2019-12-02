@@ -53,7 +53,7 @@ public class ContestacaoRepositorio {
 		return true;
 	}
 	
-	public List<Contestacao> listarContestacoes(){
+	public /*@ pure @*/ List<Contestacao> listarContestacoes(){
 		return contestacoes;
 	}
 }
