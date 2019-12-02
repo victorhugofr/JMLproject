@@ -23,7 +23,6 @@ public class TestContestacaoService {
 		//fluxo exceptional
 		contestacaoService.adicionar(contestacao);
 		contestacaoService.adicionar(contestacao);
-=======
 		/*
 		//Testando o construtor
 		//Contestacao contestacao = null;
@@ -33,13 +32,11 @@ public class TestContestacaoService {
 		*/
 		
 		//Testando Adicionar
-		ContestacaoRepositorio contestacaoRepositorio = new ContestacaoRepositorio();
-		ContestacaoService contestacaoService = new ContestacaoService(contestacaoRepositorio);
 		//Contestacao contestacao = new Contestacao();
 		//contestacao.setId(1);
 		//contestacao.setTexto("Texto");
-		Contestacao contestacao = null;
-		contestacaoService.adicionar(contestacao);
+		Contestacao contestacao2 = null;
+		contestacaoService.adicionar(contestacao2);
 		//contestacaoService.adicionar(contestacao);
 		
 
