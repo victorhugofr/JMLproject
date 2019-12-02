@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 
-privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$ad947c97_9eb6_483c_bdec_54b453b1db0f {
+privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$db96afcd_9a16_46ec_b666_203167d96efb {
 
  declare precedence: AspectJMLRac$JMLRacPost4Project, AspectJMLRac_* , *;
 
@@ -568,10 +568,10 @@ privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$ad947c97
               throw new JMLEvaluationError("" + rac$cause);
             }
        }
-      String preErrorMsg = "by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", [spec-case]: line 82, character 38 (br.com.sigcar.negocio.FuncionarioService.java:82), line 83, character 48 (br.com.sigcar.negocio.FuncionarioService.java:83), line 84, character 134 (br.com.sigcar.negocio.FuncionarioService.java:84), and \n[spec-case]: line 88, character 38 (br.com.sigcar.negocio.FuncionarioService.java:88), line 89, character 48 (br.com.sigcar.negocio.FuncionarioService.java:89), line 90, character 128 (br.com.sigcar.negocio.FuncionarioService.java:90), and \n[spec-case]: line 96, character 38 (br.com.sigcar.negocio.FuncionarioService.java:96), line 97, character 48 (br.com.sigcar.negocio.FuncionarioService.java:97), line 98, character 85 (br.com.sigcar.negocio.FuncionarioService.java:98), and \nby method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 114 (br.com.sigcar.negocio.FuncionarioService.java:114)"+", when \n"+"\t\'this.funcionarioRepositorio\' is "+object$rac.funcionarioRepositorio+"\n\t\'funcionario\' is "+funcionario;
-      String evalPreErrorMsg = "Invalid expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \n[spec-case]: line 82, character 38 (br.com.sigcar.negocio.FuncionarioService.java:82), line 83, character 48 (br.com.sigcar.negocio.FuncionarioService.java:83), line 84, character 134 (br.com.sigcar.negocio.FuncionarioService.java:84), and \n[spec-case]: line 88, character 38 (br.com.sigcar.negocio.FuncionarioService.java:88), line 89, character 48 (br.com.sigcar.negocio.FuncionarioService.java:89), line 90, character 128 (br.com.sigcar.negocio.FuncionarioService.java:90), and \n[spec-case]: line 96, character 38 (br.com.sigcar.negocio.FuncionarioService.java:96), line 97, character 48 (br.com.sigcar.negocio.FuncionarioService.java:97), line 98, character 85 (br.com.sigcar.negocio.FuncionarioService.java:98)"+", when \n"+"\t\'this.funcionarioRepositorio\' is "+object$rac.funcionarioRepositorio+"\n\t\'funcionario\' is "+funcionario+"\nCaused by: ";
+      String preErrorMsg = "by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", [spec-case]: line 82, character 38 (br.com.sigcar.negocio.FuncionarioService.java:82), line 83, character 48 (br.com.sigcar.negocio.FuncionarioService.java:83), line 84, character 134 (br.com.sigcar.negocio.FuncionarioService.java:84), and \n[spec-case]: line 88, character 38 (br.com.sigcar.negocio.FuncionarioService.java:88), and \n[spec-case]: line 92, character 38 (br.com.sigcar.negocio.FuncionarioService.java:92), line 93, character 48 (br.com.sigcar.negocio.FuncionarioService.java:93), line 94, character 128 (br.com.sigcar.negocio.FuncionarioService.java:94), and \n[spec-case]: line 100, character 38 (br.com.sigcar.negocio.FuncionarioService.java:100), line 101, character 48 (br.com.sigcar.negocio.FuncionarioService.java:101), line 102, character 85 (br.com.sigcar.negocio.FuncionarioService.java:102), and \nby method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)"+", when \n"+"\t\'this.funcionarioRepositorio\' is "+object$rac.funcionarioRepositorio+"\n\t\'funcionario\' is "+funcionario;
+      String evalPreErrorMsg = "Invalid expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \n[spec-case]: line 82, character 38 (br.com.sigcar.negocio.FuncionarioService.java:82), line 83, character 48 (br.com.sigcar.negocio.FuncionarioService.java:83), line 84, character 134 (br.com.sigcar.negocio.FuncionarioService.java:84), and \n[spec-case]: line 88, character 38 (br.com.sigcar.negocio.FuncionarioService.java:88), and \n[spec-case]: line 92, character 38 (br.com.sigcar.negocio.FuncionarioService.java:92), line 93, character 48 (br.com.sigcar.negocio.FuncionarioService.java:93), line 94, character 128 (br.com.sigcar.negocio.FuncionarioService.java:94), and \n[spec-case]: line 100, character 38 (br.com.sigcar.negocio.FuncionarioService.java:100), line 101, character 48 (br.com.sigcar.negocio.FuncionarioService.java:101), line 102, character 85 (br.com.sigcar.negocio.FuncionarioService.java:102)"+", when \n"+"\t\'this.funcionarioRepositorio\' is "+object$rac.funcionarioRepositorio+"\n\t\'funcionario\' is "+funcionario+"\nCaused by: ";
       try {
-        rac$b = (((((funcionario != null) && (object$rac.funcionarioRepositorio != null)) && object$rac.funcionarioRepositorio.getFuncionario(funcionario.getLogin()).getSenha().equals(((java.lang.Object) (funcionario.getSenha())))) || (((funcionario != null) && (object$rac.funcionarioRepositorio != null)) && !(object$rac.funcionarioRepositorio.getFuncionario(funcionario.getLogin()).getSenha().equals(((java.lang.Object) (funcionario.getSenha())))))) || (((funcionario != null) && (object$rac.funcionarioRepositorio != null)) && (object$rac.funcionarioRepositorio.getFuncionario(funcionario.getLogin()) == null)));
+        rac$b = ((((((funcionario != null) && (object$rac.funcionarioRepositorio != null)) && object$rac.funcionarioRepositorio.getFuncionario(funcionario.getLogin()).getSenha().equals(((java.lang.Object) (funcionario.getSenha())))) || (funcionario == null)) || (((funcionario != null) && (object$rac.funcionarioRepositorio != null)) && !(object$rac.funcionarioRepositorio.getFuncionario(funcionario.getLogin()).getSenha().equals(((java.lang.Object) (funcionario.getSenha())))))) || (((funcionario != null) && (object$rac.funcionarioRepositorio != null)) && (object$rac.funcionarioRepositorio.getFuncionario(funcionario.getLogin()) == null)));
        } catch (JMLNonExecutableException rac$nonExec) {
           rac$b = false;
        } catch (Throwable rac$cause) {
@@ -588,7 +588,7 @@ privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$ad947c97
         rac$result = proceed(object$rac, funcionario);//executing the method
         String nPostErrorMsg =  "";
         String evalErrorMsg = "";
-         nPostErrorMsg =  "by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 85, character 33 (br.com.sigcar.negocio.FuncionarioService.java:85), and \nby method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 114 (br.com.sigcar.negocio.FuncionarioService.java:114)"+", when \n"+"\t\'funcionario\' is "+funcionario;
+         nPostErrorMsg =  "by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 85, character 33 (br.com.sigcar.negocio.FuncionarioService.java:85), and \nby method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)"+", when \n"+"\t\'funcionario\' is "+funcionario;
          evalErrorMsg = "Invalid expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 85, character 33 (br.com.sigcar.negocio.FuncionarioService.java:85)"+", when \n"+"\t\'funcionario\' is "+funcionario+"\nCaused by: ";
        if (rac$pre0){
          try {
@@ -605,7 +605,24 @@ privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$ad947c97
          }
         JMLChecker.checkNormalPostcondition(rac$b, nPostErrorMsg, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)");
        }
-         nPostErrorMsg =  "by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 114 (br.com.sigcar.negocio.FuncionarioService.java:114)";
+         nPostErrorMsg =  "by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)";
+         evalErrorMsg = "Invalid expression in \"br.com.sigcar.negocio.FuncionarioService.java\"\nCaused by: ";
+       if ((funcionario == null)){
+         try {
+           rac$b = false;
+         } catch (JMLNonExecutableException rac$nonExec) {
+            rac$b = false;
+         } catch (Throwable rac$cause) {
+            if(rac$cause instanceof JMLAssertionError) {
+              throw (JMLAssertionError) rac$cause;
+            }
+            else {
+              throw new JMLEvaluationError(evalErrorMsg + rac$cause);
+            }
+         }
+        JMLChecker.checkNormalPostcondition(rac$b, nPostErrorMsg, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)");
+       }
+         nPostErrorMsg =  "by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)";
          evalErrorMsg = "Invalid expression in \"br.com.sigcar.negocio.FuncionarioService.java\"\nCaused by: ";
        if (rac$pre1){
          try {
@@ -622,7 +639,7 @@ privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$ad947c97
          }
         JMLChecker.checkNormalPostcondition(rac$b, nPostErrorMsg, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)");
        }
-         nPostErrorMsg =  "by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 114 (br.com.sigcar.negocio.FuncionarioService.java:114)";
+         nPostErrorMsg =  "by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)";
          evalErrorMsg = "Invalid expression in \"br.com.sigcar.negocio.FuncionarioService.java\"\nCaused by: ";
        if (rac$pre2){
          try {
@@ -667,17 +684,17 @@ privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$ad947c97
            else{
              rac$ErrorMsg += " is ";
            }
-               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 114 (br.com.sigcar.negocio.FuncionarioService.java:114)"+"\n\t"+rac$ErrorMsg+rac$e, "jml$ex", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
+               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)"+"\n\t"+rac$ErrorMsg+rac$e, "jml$ex", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
   		 }
   		   }
-  		   if (rac$b && rac$pre1) {
+  		   if (rac$b && (funcionario == null)) {
   		     if (rac$e instanceof java.lang.Exception) {
   			   java.lang.Exception jml$e = (java.lang.Exception) rac$e;
   			   boolean rac$b1 = true;
   			   try{			     
   			     rac$b1 = jml$e instanceof br.com.sigcar.exceptions.NegocioException;
   			   }   catch (JMLNonExecutableException rac$nonExec) {
-  			     throw new JMLEvaluationError("Invalid Expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 91, character 27 (br.com.sigcar.negocio.FuncionarioService.java:91)"+"\nCaused by: "+rac$e);
+  			     throw new JMLEvaluationError("Invalid Expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 89, character 27 (br.com.sigcar.negocio.FuncionarioService.java:89)"+"\nCaused by: "+rac$e);
   			   }
   			   if(!rac$b1) {
   			     if(rac$ErrorMsg.equals("")) {
@@ -694,23 +711,24 @@ privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$ad947c97
            else{
              rac$ErrorMsg += " is ";
            }
-               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 91, character 27 (br.com.sigcar.negocio.FuncionarioService.java:91)"+", and \n"+"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 114 (br.com.sigcar.negocio.FuncionarioService.java:114)"+"\n\t"+rac$ErrorMsg+rac$e, "jml$e", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
+               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 89, character 27 (br.com.sigcar.negocio.FuncionarioService.java:89)"+", and \n"+"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)"+"\n\t"+rac$ErrorMsg+rac$e, "jml$e", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
   		 }
-
-  		     if (rac$e instanceof br.com.sigcar.exceptions.NegocioException) {
-  			   br.com.sigcar.exceptions.NegocioException e = (br.com.sigcar.exceptions.NegocioException) rac$e;
+  		   }
+  		   if (rac$b && rac$pre1) {
+  		     if (rac$e instanceof java.lang.Exception) {
+  			   java.lang.Exception jml$e = (java.lang.Exception) rac$e;
   			   boolean rac$b2 = true;
   			   try{			     
-  			     rac$b2 = e.getMessage().equals(((java.lang.Object) ("Senha incorreta")));
+  			     rac$b2 = jml$e instanceof br.com.sigcar.exceptions.NegocioException;
   			   }   catch (JMLNonExecutableException rac$nonExec) {
-  			     throw new JMLEvaluationError("Invalid Expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 93, character 67 (br.com.sigcar.negocio.FuncionarioService.java:93)"+"\nCaused by: "+rac$e);
+  			     throw new JMLEvaluationError("Invalid Expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 95, character 27 (br.com.sigcar.negocio.FuncionarioService.java:95)"+"\nCaused by: "+rac$e);
   			   }
   			   if(!rac$b2) {
   			     if(rac$ErrorMsg.equals("")) {
-  			       rac$ErrorMsg = "e";
+  			       rac$ErrorMsg = "jml$e";
   			     }
   			     else {
-  			       rac$ErrorMsg += " and e";
+  			       rac$ErrorMsg += " and jml$e";
   			     }
   			   }
   			   rac$b = rac$b && rac$b2;
@@ -720,24 +738,23 @@ privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$ad947c97
            else{
              rac$ErrorMsg += " is ";
            }
-               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 93, character 67 (br.com.sigcar.negocio.FuncionarioService.java:93)"+", and \n"+"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 114 (br.com.sigcar.negocio.FuncionarioService.java:114)"+"\n\t"+rac$ErrorMsg+rac$e, "e", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
+               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 95, character 27 (br.com.sigcar.negocio.FuncionarioService.java:95)"+", and \n"+"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)"+"\n\t"+rac$ErrorMsg+rac$e, "jml$e", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
   		 }
-  		   }
-  		   if (rac$b && rac$pre2) {
-  		     if (rac$e instanceof java.lang.Exception) {
-  			   java.lang.Exception jml$e = (java.lang.Exception) rac$e;
+
+  		     if (rac$e instanceof br.com.sigcar.exceptions.NegocioException) {
+  			   br.com.sigcar.exceptions.NegocioException e = (br.com.sigcar.exceptions.NegocioException) rac$e;
   			   boolean rac$b3 = true;
   			   try{			     
-  			     rac$b3 = jml$e instanceof br.com.sigcar.exceptions.NegocioException;
+  			     rac$b3 = e.getMessage().equals(((java.lang.Object) ("Senha incorreta")));
   			   }   catch (JMLNonExecutableException rac$nonExec) {
-  			     throw new JMLEvaluationError("Invalid Expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 99, character 27 (br.com.sigcar.negocio.FuncionarioService.java:99)"+"\nCaused by: "+rac$e);
+  			     throw new JMLEvaluationError("Invalid Expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 97, character 67 (br.com.sigcar.negocio.FuncionarioService.java:97)"+"\nCaused by: "+rac$e);
   			   }
   			   if(!rac$b3) {
   			     if(rac$ErrorMsg.equals("")) {
-  			       rac$ErrorMsg = "jml$e";
+  			       rac$ErrorMsg = "e";
   			     }
   			     else {
-  			       rac$ErrorMsg += " and jml$e";
+  			       rac$ErrorMsg += " and e";
   			     }
   			   }
   			   rac$b = rac$b && rac$b3;
@@ -747,23 +764,24 @@ privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$ad947c97
            else{
              rac$ErrorMsg += " is ";
            }
-               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 99, character 27 (br.com.sigcar.negocio.FuncionarioService.java:99)"+", and \n"+"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 114 (br.com.sigcar.negocio.FuncionarioService.java:114)"+"\n\t"+rac$ErrorMsg+rac$e, "jml$e", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
+               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 97, character 67 (br.com.sigcar.negocio.FuncionarioService.java:97)"+", and \n"+"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)"+"\n\t"+rac$ErrorMsg+rac$e, "e", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
   		 }
-
-  		     if (rac$e instanceof br.com.sigcar.exceptions.NegocioException) {
-  			   br.com.sigcar.exceptions.NegocioException e = (br.com.sigcar.exceptions.NegocioException) rac$e;
+  		   }
+  		   if (rac$b && rac$pre2) {
+  		     if (rac$e instanceof java.lang.Exception) {
+  			   java.lang.Exception jml$e = (java.lang.Exception) rac$e;
   			   boolean rac$b4 = true;
   			   try{			     
-  			     rac$b4 = e.getMessage().equals(((java.lang.Object) ("Funcionario nao encontrado")));
+  			     rac$b4 = jml$e instanceof br.com.sigcar.exceptions.NegocioException;
   			   }   catch (JMLNonExecutableException rac$nonExec) {
-  			     throw new JMLEvaluationError("Invalid Expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 101, character 78 (br.com.sigcar.negocio.FuncionarioService.java:101)"+"\nCaused by: "+rac$e);
+  			     throw new JMLEvaluationError("Invalid Expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 103, character 27 (br.com.sigcar.negocio.FuncionarioService.java:103)"+"\nCaused by: "+rac$e);
   			   }
   			   if(!rac$b4) {
   			     if(rac$ErrorMsg.equals("")) {
-  			       rac$ErrorMsg = "e";
+  			       rac$ErrorMsg = "jml$e";
   			     }
   			     else {
-  			       rac$ErrorMsg += " and e";
+  			       rac$ErrorMsg += " and jml$e";
   			     }
   			   }
   			   rac$b = rac$b && rac$b4;
@@ -773,7 +791,33 @@ privileged aspect AspectJMLRac_br_com_sigcar_negocio_FuncionarioService$ad947c97
            else{
              rac$ErrorMsg += " is ";
            }
-               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 101, character 78 (br.com.sigcar.negocio.FuncionarioService.java:101)"+", and \n"+"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 114 (br.com.sigcar.negocio.FuncionarioService.java:114)"+"\n\t"+rac$ErrorMsg+rac$e, "e", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
+               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 103, character 27 (br.com.sigcar.negocio.FuncionarioService.java:103)"+", and \n"+"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)"+"\n\t"+rac$ErrorMsg+rac$e, "jml$e", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
+  		 }
+
+  		     if (rac$e instanceof br.com.sigcar.exceptions.NegocioException) {
+  			   br.com.sigcar.exceptions.NegocioException e = (br.com.sigcar.exceptions.NegocioException) rac$e;
+  			   boolean rac$b5 = true;
+  			   try{			     
+  			     rac$b5 = e.getMessage().equals(((java.lang.Object) ("Funcionario nao encontrado")));
+  			   }   catch (JMLNonExecutableException rac$nonExec) {
+  			     throw new JMLEvaluationError("Invalid Expression in \"br.com.sigcar.negocio.FuncionarioService.java\" by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 105, character 78 (br.com.sigcar.negocio.FuncionarioService.java:105)"+"\nCaused by: "+rac$e);
+  			   }
+  			   if(!rac$b5) {
+  			     if(rac$ErrorMsg.equals("")) {
+  			       rac$ErrorMsg = "e";
+  			     }
+  			     else {
+  			       rac$ErrorMsg += " and e";
+  			     }
+  			   }
+  			   rac$b = rac$b && rac$b5;
+           if(rac$ErrorMsg.indexOf("and") >= 0 ){
+             rac$ErrorMsg += " are ";
+           }
+           else{
+             rac$ErrorMsg += " is ";
+           }
+               JMLChecker.checkExceptionalPostcondition(rac$b,"by method br.com.sigcar.negocio.FuncionarioService.logar regarding specifications at \nline 105, character 78 (br.com.sigcar.negocio.FuncionarioService.java:105)"+", and \n"+"by method br.com.sigcar.negocio.FuncionarioService.logar regarding code at \nFile \"br.com.sigcar.negocio.FuncionarioService.java\", line 121 (br.com.sigcar.negocio.FuncionarioService.java:121)"+"\n\t"+rac$ErrorMsg+rac$e, "e", true, -1, object$rac.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(object$rac))+".logar(br.com.sigcar.dominio.Funcionario)", rac$e);
   		 }
   		   }
            if(JMLChecker.hasAnyJMLError){

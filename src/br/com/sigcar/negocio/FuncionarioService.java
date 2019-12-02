@@ -85,6 +85,10 @@ public class FuncionarioService {
 	  @   ensures \result == funcionario;
 	  @ also
 	  @  public exceptional_behavior
+	  @   requires funcionario == null;
+	  @   signals_only NegocioException;
+	  @ also
+	  @  public exceptional_behavior
 	  @   requires funcionario != null;
 	  @   requires funcionarioRepositorio!=null;
 	  @   requires !funcionarioRepositorio.getFuncionario(funcionario.getLogin()).getSenha().equals(funcionario.getSenha());
@@ -101,6 +105,9 @@ public class FuncionarioService {
 	  @               e.getMessage().equals("Funcionario nao encontrado");
 	  @*/
 	public Funcionario logar(Funcionario funcionario) throws NegocioException{
+		if(funcionario==null) {
+			throw new NegocioException("Funcionario nao encontrado");
+		}
 		Funcionario funcionarioBd = funcionarioRepositorio.getFuncionario(funcionario.getLogin());
 		if (funcionarioBd != null && funcionarioBd.getSenha().equals(funcionario.getSenha())) {
 			return funcionarioBd;

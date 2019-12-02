@@ -88,7 +88,7 @@ public class UsuarioMBean implements Serializable {
 		return "/pages/usuarios/list.jsf?faces-redirect=true";
 	}
 	
-	public String removerUsuario() {
+	public String removerUsuario() throws NegocioException {
 		Usuario usuarioRemovido = usuariosModel.getRowData();
 		usuarioService.remover(usuarioRemovido);
 		//return listarMateriais();

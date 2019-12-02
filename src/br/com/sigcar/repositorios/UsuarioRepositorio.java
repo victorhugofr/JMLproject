@@ -26,7 +26,7 @@ public class UsuarioRepositorio {
 		return false;
 	}
 	
-	public  Usuario getUsuario(String login) {
+	public /*@ pure */ Usuario getUsuario(String login) {
 		for (Usuario u : usuarios) {
 			if (u.getLogin().equals(login)) {
 				return u;
@@ -43,6 +43,9 @@ public class UsuarioRepositorio {
 	  @ ensures usuarios.size() == \old(usuarios.size())+1;
 	  */
 	public boolean salvar(Usuario entidade) {
+		if(entidade == null || this.contains(entidade)) {
+			return false;
+		}
 		usuarios.add(entidade);
 		return true;
 	}
@@ -59,6 +62,9 @@ public class UsuarioRepositorio {
 	  @ ensures usuarios.size() == \old(usuarios.size())-1;
 	  */
 	public boolean remover(Usuario entidade) {
+		if(entidade==null||!this.contains(entidade)) {
+			return false;
+		}
 		usuarios.remove(entidade);
 		return true;
 	}

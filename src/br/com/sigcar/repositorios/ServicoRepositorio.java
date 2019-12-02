@@ -43,6 +43,9 @@ public class ServicoRepositorio {
 	  @ ensures servicos.size() == \old(servicos.size())+1;
 	  */
 	public boolean salvar(Servico entidade) {
+		if(entidade==null  || this.contains(entidade)) {
+			return false;
+		}
 		servicos.add(entidade);
 		return true;
 	}
