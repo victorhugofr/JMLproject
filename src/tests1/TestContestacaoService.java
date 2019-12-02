@@ -9,6 +9,21 @@ public class TestContestacaoService {
 
 	public static void main(String[] args) throws NegocioException {
 		
+
+		ContestacaoRepositorio contestacaoRepositorio = new ContestacaoRepositorio();
+
+		int id = 1;
+		Contestacao contestacao= new Contestacao();
+		contestacao.setId(id);
+
+		ContestacaoService contestacaoService =  new ContestacaoService(contestacaoRepositorio);
+//		//fluxo feliz
+//		contestacaoService.adicionar(contestacao);
+		
+		//fluxo exceptional
+		contestacaoService.adicionar(contestacao);
+		contestacaoService.adicionar(contestacao);
+=======
 		/*
 		//Testando o construtor
 		//Contestacao contestacao = null;
@@ -27,10 +42,9 @@ public class TestContestacaoService {
 		contestacaoService.adicionar(contestacao);
 		//contestacaoService.adicionar(contestacao);
 		
-		
-		
-		
-		System.out.println("--Fim da Execução--");
-	}
 
+		
+		
+		System.out.println("--Fim da ExecuÃ§Ã£o--");
+	}
 }

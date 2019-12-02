@@ -82,7 +82,7 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public String getNome() {
+	public /*@ pure */ String getNome() {
 		return nome;
 	}
 	//@ requires nome != null;

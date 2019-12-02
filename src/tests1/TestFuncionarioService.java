@@ -53,7 +53,7 @@ public class TestFuncionarioService {
 		funcionarioService.logar(funcionario2);
 		
 		
-		System.out.println("--Fim da Execução--");
+		System.out.println("--Fim da ExecuÃ§Ã£o--");
 	}
 
 }

@@ -37,10 +37,26 @@ public class ServicoService {
 		this.servicoRepositorio=servicoRepositorio2;
 	}
 	
+	/*@  public normal_behavior
+	  @   requires servico != null;
+	  @   requires servicoRepositorio!=null;
+	  @   requires documentoRepositorio!=null;
+	  @   requires documentos != null;
+	  @   ensures \result == servico;
+	  @ also
+	  @  public exceptional_behavior
+	  @   requires servicoRepositorio.contains(servico);
+	  @   signals_only NegocioException;
+	  @ also
+	  @	 public exceptional_behavior
+	  @	  requires documentos==null;
+	  @   signals_only NegocioException;
+	  @*/
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Servico adicionar(Servico servico, List<Documento> documentos)  throws NegocioException {			
-		Servico servicoBd = servicoRepositorio.getServico(servico.getNomeEntidade());
-		if(servicoBd == null) { 
+		servico.setDocumentos(documentos);
+		servico.setStatus(true);
+		if(servicoRepositorio.salvar(servico)) { 
 			if(documentos==null) {
 				throw new
 				NegocioException("Insira um documento");
@@ -48,10 +64,6 @@ public class ServicoService {
 			for(int i=0;i<documentos.size();i++) {
 				documentoRepositorio.salvar(documentos.get(i));
 			}			
-			servico.setDocumentos(documentos);
-			servico.setStatus(true);
-			servicoRepositorio.salvar(servico);
-			servicoBd=null;
 		}else {
 			throw new
 			NegocioException("Servico ja esta aberto");

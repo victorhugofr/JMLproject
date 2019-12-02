@@ -7,26 +7,24 @@ import br.com.sigcar.repositorios.DocumentoRepositorio;
 
 public class TestDocumentoService {
 
-	public static void main(String[] args) throws NegocioException {
-		/*
-		//Testando Construtor
-		DocumentoRepositorio documentoRepositorio = null;
-		DocumentoService documentoService = new DocumentoService(documentoRepositorio);
-		*/
+
+public static void main(String[] args) throws NegocioException {
 		
-		//Testando adicionar()
 		DocumentoRepositorio documentoRepositorio = new DocumentoRepositorio();
-		DocumentoService documentoService = new DocumentoService(documentoRepositorio);
-		Documento documento = null;
-		//Documento documento = new Documento();
-		//documento.setId(1);
-		//documento.setObservacao("Observacao");
+
+		int id = 1;
+		Documento documento= new Documento();
+		documento.setId(id);
+
+		DocumentoService documentoService =  new DocumentoService(documentoRepositorio);
+//		//fluxo feliz
+//		documentoService.adicionar(documento);
+		
+		//fluxo exceptional
 		documentoService.adicionar(documento);
-		//documentoService.adicionar(documento);
+		documentoService.adicionar(documento);
 		
-		
-		
-		System.out.println("--Fim da Execução--");
+		System.out.println("--Fim da ExecuÃ§Ã£o--");
 	}
 
 }

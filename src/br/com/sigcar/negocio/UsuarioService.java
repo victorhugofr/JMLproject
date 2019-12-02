@@ -15,48 +15,109 @@ import br.com.sigcar.repositorios.UsuarioRepositorio;
 public class UsuarioService {
 	
 	@Inject
-	private UsuarioRepositorio usuarioRepositorio = new UsuarioRepositorio();//new pois o JML não inicia o inject
+	private /*@ spec_public @*/ UsuarioRepositorio usuarioRepositorio = new UsuarioRepositorio();//new pois o JML não inicia o inject
 	
 	public UsuarioService() {
 		
 	}
-	
-	public UsuarioService(UsuarioRepositorio usuarioRepositorio) {
-		this.usuarioRepositorio = usuarioRepositorio;
+	/*@ 
+	  @ requires usuarioRepositorio2 != null;
+	  @*/
+	public UsuarioService(UsuarioRepositorio usuarioRepositorio2) {
+		this.usuarioRepositorio = usuarioRepositorio2;
 	}
 	
+	/*@  public normal_behavior
+	  @   requires usuario != null;
+	  @   requires usuarioRepositorio!=null;
+	  @   ensures \result == usuario;
+	  @ also
+	  @  public exceptional_behavior
+	  @   requires usuarioRepositorio.contains(usuario);
+	  @   signals_only NegocioException;
+	  @*/
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public	Usuario adicionar(Usuario usuario) throws NegocioException {
-		Usuario usuarioBd = usuarioRepositorio.getUsuario(usuario.getLogin());
-		if(usuarioBd == null) {
-			usuarioRepositorio.salvar(usuario);
+		if(usuarioRepositorio.salvar(usuario)) {
+			return usuario;
 		}
 		else {
 			throw new
 			NegocioException("O usuario ja existe.");
 		}	
-		return usuario;
-	}
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void remover(Usuario usuario) {
-		usuarioRepositorio.remover(usuario);
 	}
 	
+	/*@  public normal_behavior
+	  @   requires usuario != null;
+	  @   requires usuarioRepositorio!=null;
+	  @ also
+	  @  public exceptional_behavior
+	  @   requires !usuarioRepositorio.contains(usuario);
+	  @   signals_only NegocioException;
+	  @*/
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void remover(Usuario usuario) throws NegocioException {
+		if(!usuarioRepositorio.remover(usuario)) {
+			throw new NegocioException("Usuario nao existe ou nulo");
+		}
+	}
+	
+	/*@ 
+	  @ requires usuarioRepositorio != null;
+	  @*/
 	public List<Usuario> listar() {
 		return usuarioRepositorio.listarUsuarios();
 	}
 	
+	/*@ 
+	  @ requires usuario != null;
+	  @*/
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void atualizar(Usuario usuario) {
 		usuarioRepositorio.salvar(usuario);
 	}
 	
+	/*@ 
+	  @ requires usuario != null;
+	  @ requires usuarioRepositorio !=null;
+	  @*/
 	public Usuario buscar(Usuario usuario) {
 		Usuario usuarioBd = usuarioRepositorio.getUsuario(usuario.getLogin());
 		return usuarioBd;
 	}
 	
+	/*@  public normal_behavior
+	  @   requires usuario != null;
+	  @   requires usuarioRepositorio!=null;
+	  @	  requires usuarioRepositorio.getUsuario(usuario.getLogin()).getSenha().equals(usuario.getSenha());
+	  @   ensures \result == usuario;
+	  @ also
+	  @  public exceptional_behavior
+	  @   requires usuario != null;
+	  @   requires usuarioRepositorio!=null;
+	  @   requires !usuarioRepositorio.getUsuario(usuario.getLogin()).getSenha().equals(usuario.getSenha());
+	  @   signals_only NegocioException;
+	  @   signals (NegocioException e)
+	  @               e.getMessage().equals("Senha incorreta");
+	  @ also
+	  @  public exceptional_behavior
+	  @   requires usuario != null;
+	  @   requires usuarioRepositorio!=null;
+	  @   requires usuarioRepositorio.getUsuario(usuario.getLogin()) == null;
+	  @   signals_only NegocioException;
+	  @   signals (NegocioException e)
+	  @               e.getMessage().equals("Usuario nao encontrado");
+	  @ also
+	  @  public exceptional_behavior
+	  @   requires usuario == null;
+	  @   signals_only NegocioException;
+	  @   signals (NegocioException e )
+	  @                e.getMessage().equals("Usuario nao encontrado");
+	  @*/
 	public Usuario logar(Usuario usuario) throws NegocioException{
+		if(usuario==null) {
+			throw new NegocioException("Usuario nao encontrado");
+		}
 		Usuario usuarioBd = usuarioRepositorio.getUsuario(usuario.getLogin());
 		if (usuarioBd != null && usuarioBd.getSenha().equals(usuario.getSenha())) {
 			return usuarioBd;
